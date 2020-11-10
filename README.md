@@ -10,9 +10,5 @@ https://trello.com/b/krJdCgLM/everything-grace-shopper
 
 3. Database schema:
 
-<img
-src=“https://bit.ly/38vCjus”
-raw=true
-alt="GraceShopper Database Schema”
-style=“margin-right: 10px;”
-/>
+![Image of DB Schema](https://bit.ly/38vCjus)
+
