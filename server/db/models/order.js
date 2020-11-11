@@ -4,20 +4,15 @@ const db = require('../db')
 const Order = db.define('order', {
   status: {
     type: Sequelize.STRING
-  }
-})
-
-const Order_Item = db.define('order_items', {
-  quantity: {
-    type: Sequelize.INTEGER,
-    defaultValue: 1
   },
-  selectedSize: {
-    type: Sequelize.ENUM('scoop', 'pint', 'tub')
+  total_price: {
+    type: Sequelize.FLOAT
+  },
+  is_fulfilled: {
+    type: Sequelize.BOOLEAN
   }
 })
 
 module.exports = {
-  Order,
-  Order_Item
+  Order
 }
