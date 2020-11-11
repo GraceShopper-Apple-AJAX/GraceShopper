@@ -7,7 +7,7 @@ const Order = db.define('order', {
   }
 })
 
-const Order_Items = db.define('order_items', {
+const Order_Item = db.define('order_items', {
   quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1
@@ -19,5 +19,5 @@ const Order_Items = db.define('order_items', {
 
 module.exports = {
   Order,
-  Order_Items
+  Order_Item
 }
