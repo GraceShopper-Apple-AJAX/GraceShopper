@@ -16,19 +16,30 @@ const Product = db.define('product', {
       notEmpty: true
     }
   },
-  regular_price: {
-    type: Sequelize.INTEGER,
+  scoop_price: {
+    type: Sequelize.FLOAT,
     allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  discount_price: {
-    type: Sequelize.INTEGER,
-    allowNull: true
+  pint_price: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
-  size: {
-    type: Sequelize.ENUM('scoop', 'pint', 'tub')
+  tub_price: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  discount_percentage: {
+    type: Sequelize.FLOAT,
+    allowNull: true
   },
   status: {
     type: Sequelize.ENUM('out_of_stock', 'in_stock', 'running_low')
