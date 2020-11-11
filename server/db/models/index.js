@@ -1,5 +1,9 @@
 const db = require('./database')
 const User = require('./user')
+const Address = require('./address')
+const Session = require('./session')
+const {Order, Order_Items} = require('./order')
+const Product = require('./product')
 const { Cart, Cart_Item, CC_Transactions } = require('./cart')
 
 /**
@@ -8,6 +12,18 @@ const { Cart, Cart_Item, CC_Transactions } = require('./cart')
  *
  *    BlogPost.belongsTo(User)
  */
+
+User.hasOne(Address)
+Address.belongsTo(User)
+
+User.hasMany(Session)
+Session.belongsTo(User)
+
+Order.hasMany(Order_Items)
+Order_Items.belongsTo(Order)
+
+User.hasMany(Order)
+Order.belongsTo(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -19,7 +35,12 @@ const { Cart, Cart_Item, CC_Transactions } = require('./cart')
 module.exports = {
   db,
   User,
+  Session,
+  Address,
+  Order,
+  Order_Items,
+  Product,
   Cart,
   Cart_Item,
-  CC_Transactions
+  CC_Transaction
 }
