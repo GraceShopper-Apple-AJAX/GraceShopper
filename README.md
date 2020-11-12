@@ -10,6 +10,6 @@ https://trello.com/b/krJdCgLM/everything-grace-shopper
 
 3.  Database schema:
 
-![Image of DB Schema](https://bit.ly/38vCjus)
+![Image of DB Schema](https://bit.ly/2ItJTuE)
 
 test
