@@ -9,18 +9,63 @@ import {auth} from '../store'
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
+  if (displayName === 'Login') {
+    return (
+      <div>
+        Login Form
+        <form onSubmit={handleSubmit} name={name}>
+          <div>
+            <label htmlFor="email">
+              <small>Email</small>
+            </label>
+            <input name="email" type="text" />
+          </div>
+          <div>
+            <label htmlFor="password">
+              <small>Password</small>
+            </label>
+            <input name="password" type="password" />
+          </div>
+          <div>
+            <button type="submit">{displayName}</button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
+        </form>
+        <a href="/auth/google">{displayName} with Google</a>
+      </div>
+    )
+  }
   return (
     <div>
+      Fields marked with an asterisk are required.
       <form onSubmit={handleSubmit} name={name}>
         <div>
+          <label htmlFor="firstName">
+            <small>First name*</small>
+          </label>
+          <input name="firstName" type="text" />
+        </div>
+        <div>
+          <label htmlFor="lastName">
+            <small>Last Name*</small>
+          </label>
+          <input name="lastName" type="text" />
+        </div>
+        <div>
           <label htmlFor="email">
-            <small>Email</small>
+            <small>Email*</small>
           </label>
           <input name="email" type="text" />
         </div>
         <div>
+          <label htmlFor="mobile">
+            <small>Phone Number</small>
+          </label>
+          <input name="mobile" type="text" />
+        </div>
+        <div>
           <label htmlFor="password">
-            <small>Password</small>
+            <small>Password*</small>
           </label>
           <input name="password" type="password" />
         </div>
@@ -29,7 +74,7 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">{displayName} with sGoogle</a>
+      <a href="/auth/google">{displayName} with Google</a>
     </div>
   )
 }
