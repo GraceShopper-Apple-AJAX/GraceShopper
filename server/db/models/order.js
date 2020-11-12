@@ -3,16 +3,14 @@ const db = require('../db')
 
 const Order = db.define('order', {
   status: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   total_price: {
-    type: Sequelize.FLOAT
+    type: Sequelize.FLOAT,
   },
   is_fulfilled: {
-    type: Sequelize.BOOLEAN
-  }
+    type: Sequelize.BOOLEAN,
+  },
 })
 
-module.exports = {
-  Order
-}
+module.exports = Order
