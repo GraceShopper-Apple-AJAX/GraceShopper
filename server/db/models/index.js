@@ -1,11 +1,11 @@
-const db = require('../db')
-const User = require('./user')
-const Order = require('./order')
-const Product = require('./product')
-const Sequelize = require('sequelize')
+const db = require('../db');
+const User = require('./user');
+const Order = require('./order');
+const Product = require('./product');
+const Sequelize = require('sequelize');
 
-//through table: order_item
-const Order_Item = db.define('Order_Item', {
+//through table: Order_Items
+const Order_Items = db.define('Order_Items', {
   quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1,
@@ -18,17 +18,17 @@ const Order_Item = db.define('Order_Item', {
   historical_price: {
     type: Sequelize.FLOAT,
   },
-})
+});
 
 //Associations
-Order.belongsToMany(Product, {through: 'Order_Item'})
-Product.belongsToMany(Order, {through: 'Order_Item'})
+Order.belongsToMany(Product, {through: 'Order_Items'});
+Product.belongsToMany(Order, {through: 'Order_Items'});
 
-Order.hasMany(Order_Item)
-Order_Item.belongsTo(Order)
+Order.hasMany(Order_Items);
+Order_Items.belongsTo(Order);
 
-User.hasMany(Order)
-Order.belongsTo(User)
+User.hasMany(Order);
+Order.belongsTo(User);
 
 //export modules
 module.exports = {
@@ -36,5 +36,5 @@ module.exports = {
   User,
   Order,
   Product,
-  Order_Item
-}
+  Order_Items,
+};
