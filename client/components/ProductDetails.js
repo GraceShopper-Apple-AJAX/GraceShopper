@@ -8,7 +8,6 @@ const ProductDetails = (props) => {
     <div key={product.id}>
       <Link to={`/products/${product.id}`}>
         <h3> {product.name} </h3>
-        <h4> {product.description} </h4>
         <img src={product.imageUrl} height="200" />
       </Link>
       <button
