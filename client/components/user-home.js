@@ -1,16 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+
+import {Route} from 'react-router-dom'
 
 /**
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {isLoggedIn, firstName, role} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
+      {role === 'admin' ? <Link to="/admin">Admin Panel</Link> : null}
     </div>
   )
 }
@@ -20,7 +24,9 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    firstName: state.user.firstName,
+    role: state.user.role,
+    isLoggedIn: !!state.user.id
   }
 }
 
