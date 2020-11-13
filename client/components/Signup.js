@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import {Redirect} from 'react-router-dom'
-import {addUserThunk} from '../store/user'
-import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+import {addUserThunk} from '../store/user';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
-import axios from 'axios'
+import axios from 'axios';
 
 class Signup extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       firstName: '',
       lastName: '',
@@ -16,19 +16,19 @@ class Signup extends Component {
       mobile: '',
       password: '',
       confirmPassword: '',
-      redirectTo: null
-    }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+      redirectTo: null,
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
-    })
+      [event.target.name]: event.target.value,
+    });
   }
 
   handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     axios
       .post('/api/users', {
@@ -37,31 +37,31 @@ class Signup extends Component {
         email: this.state.email,
         mobile: this.state.mobile,
         password: this.state.password,
-        confirmPassword: this.state.confirmPassword
+        confirmPassword: this.state.confirmPassword,
       })
-      .then(response => {
-        console.log(response)
+      .then((response) => {
+        console.log(response);
         if (
           !response.data.error &&
-          this.state.password == this.state.confirmPassword
+          this.state.password === this.state.confirmPassword
         ) {
-          console.log('success - user created')
+          console.log('success - user created');
           this.setState({
             //redirect to login page
-            redirectTo: '/login'
-          })
+            redirectTo: '/login',
+          });
         } else {
-          console.log('username already taken')
+          console.log('username already taken');
         }
       })
-      .catch(error => {
-        console.log(error)
-      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   render() {
     if (this.state.redirectTo) {
-      return <Redirect to={{pathname: this.state.redirectTo}} />
+      return <Redirect to={{pathname: this.state.redirectTo}} />;
     } else {
       return (
         <div>
@@ -171,9 +171,9 @@ class Signup extends Component {
             </div>
           </form>
         </div>
-      )
+      );
     }
   }
 }
 
-export default Signup
+export default Signup;

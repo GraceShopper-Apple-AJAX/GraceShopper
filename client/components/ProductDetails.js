@@ -1,15 +1,14 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 const ProductDetails = (props) => {
-  const products = props.products
+  const products = props.products;
 
   return products.map((product) => (
     <div key={product.id}>
       <Link to={`/products/${product.id}`}>
         <h3> {product.name} </h3>
-        <h4> {product.description} </h4>
-        <img src={product.imageUrl} width="200" height="200" />
+        <img src={product.imageUrl} height="200" />
       </Link>
       <button
         name={props.buttonLabel}
@@ -19,7 +18,7 @@ const ProductDetails = (props) => {
         {props.buttonLabel}
       </button>
     </div>
-  ))
-}
+  ));
+};
 
-export default ProductDetails
+export default ProductDetails;
