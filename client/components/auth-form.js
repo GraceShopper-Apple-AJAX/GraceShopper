@@ -37,8 +37,6 @@ const AuthForm = (props) => {
 
 const mapLogin = (state) => {
   return {
-    name: 'login',
-    displayName: 'Login',
     error: state.user.error,
   };
 };
@@ -50,7 +48,8 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(auth(email, password, formName));
+      const role = evt.target.role.value
+      dispatch(auth(email, password, role, formName));
     },
   };
 };
