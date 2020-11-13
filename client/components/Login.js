@@ -1,13 +1,13 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import PropTypes from 'prop-types'
-import {auth} from '../store'
+import React from 'react';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {auth} from '../store';
 
 /**
  * COMPONENT
  */
-const Login = props => {
-  const {name, handleSubmit, error} = props
+const Login = (props) => {
+  const {name, handleSubmit, error} = props;
 
   return (
     <div>
@@ -32,31 +32,29 @@ const Login = props => {
       </form>
       <a href="/auth/google">Login with Google</a>
     </div>
-  )
-}
+  );
+};
 
-const mapLogin = state => {
+const mapLogin = (state) => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: state.user.error
-  }
-}
+    error: state.user.error,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const formName = evt.target.name
-      const email = evt.target.email.value
-      const role = evt.target.role
-      const password = evt.target.password.value
-      dispatch(auth(formName, email, role, password))
-    }
-  }
-}
-
-export const Login = connect(mapLogin, mapDispatch)(Login)
+      evt.preventDefault();
+      const formName = evt.target.name;
+      const email = evt.target.email.value;
+      const role = evt.target.role;
+      const password = evt.target.password.value;
+      dispatch(auth(formName, email, role, password));
+    },
+  };
+};
 
 /**
  * PROP TYPES
@@ -65,5 +63,7 @@ Login.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
-}
+  error: PropTypes.object,
+};
+
+export default connect(mapLogin, mapDispatch)(Login);

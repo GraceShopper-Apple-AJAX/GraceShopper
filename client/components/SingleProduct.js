@@ -32,10 +32,19 @@ class SingleProduct extends React.Component {
             className="single-product-image"
             height="200"
           />
-          <h3>Description: {product.description} </h3>
-          <h3>Status: {this.getStatusMessage(product)}</h3>
+          <h3>Prices:</h3>
+          <ul>
+            <li>Scoop - ${product.scoop_price}</li>
+            <li>Pint - ${product.pint_price}</li>
+            <li>Tub - ${product.tub_price}</li>
+          </ul>
+          <h3>Description:</h3> {product.description}
+          <h3>Status:</h3> {this.getStatusMessage(product)}
           {product.status === 'out_of_stock' ? undefined : (
-            <h3> Quantity: {product.quantity} </h3>
+            <>
+              <h3>Quantity:</h3>
+              {product.quantity}
+            </>
           )}
         </div>
       </div>
