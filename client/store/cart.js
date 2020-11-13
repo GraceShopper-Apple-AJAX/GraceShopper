@@ -1,41 +1,42 @@
-// import axios from 'axios'
+
+import axios from 'axios'
 
 // Actions
-const SET_CART = 'GET_CART'
-const UPDATE_CART = 'UPDATE_CART'
+const SET_CART = 'SET_CART';
+const UPDATE_CART = 'UPDATE_CART';
 
 // Action Creators
-export const setCart = cart => ({
+export const setCart = (cart) => ({
   type: SET_CART,
-  cart
-})
-export const updateCart = cart => ({
+  cart,
+});
+export const updateCart = (cart) => ({
   type: UPDATE_CART,
-  cart
-})
+  cart,
+});
 
 // Thunk Creators
 export const fetchCart = () => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
-      const {data} = await Axios.get('/api/cart')
-      dispatch(setCart(data))
+      const {data} = await axios.get('/api/cart');
+      dispatch(setCart(data));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
-}
+  };
+};
 
 // Reducer
-const initialState = {}
+const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case SET_CART:
-      return action.cart
+      return action.cart;
     case UPDATE_CART:
-      return action.cart
+      return action.cart;
     default:
-      return state
+      return state;
   }
 }
