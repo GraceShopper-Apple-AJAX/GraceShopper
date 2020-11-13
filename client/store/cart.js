@@ -1,7 +1,8 @@
-// import axios from 'axios'
+
+import axios from 'axios'
 
 // Actions
-const SET_CART = 'GET_CART';
+const SET_CART = 'SET_CART';
 const UPDATE_CART = 'UPDATE_CART';
 
 // Action Creators
@@ -18,7 +19,7 @@ export const updateCart = (cart) => ({
 export const fetchCart = () => {
   return async (dispatch) => {
     try {
-      const {data} = await Axios.get('/api/cart');
+      const {data} = await axios.get('/api/cart');
       dispatch(setCart(data));
     } catch (err) {
       console.log(err);

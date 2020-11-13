@@ -12,7 +12,8 @@ const User = db.define('user', {
     allowNull: false
   },
   role: {
-    type: Sequelize.ENUM('admin', 'logged in user', 'guest')
+    type: Sequelize.ENUM('admin', 'user'),
+    defaultValue: 'user'
   },
   mobile: {
     type: Sequelize.STRING,

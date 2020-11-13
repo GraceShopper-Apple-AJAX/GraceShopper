@@ -1,16 +1,20 @@
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+
+const Navbar = () => (
   <div>
     <nav>
       <h1>Ice Cream Shoppe</h1>
       <div>
         <Link to="/home">Home</Link>
         <Link to="/products">Products</Link>
+        <Link to="/home">About Us</Link>
+        <Link to="/home">Contact</Link>
         {isLoggedIn ? (
           <React.Fragment>
             {/* The navbar will show these links after you log in */}
@@ -30,7 +34,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <Link to="/cart">Cart</Link>
       </div>
     </nav>
-    <hr />
   </div>
 );
 
@@ -50,9 +53,6 @@ const mapDispatch = (dispatch) => {
     },
   };
 };
-
-export default connect(mapState, mapDispatch)(Navbar);
-
 /**
  * PROP TYPES
  */
@@ -60,3 +60,7 @@ Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
 };
+
+
+export default connect(mapState, mapDispatch)(Navbar);
+
