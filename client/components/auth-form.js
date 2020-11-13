@@ -6,12 +6,12 @@ import {auth} from '../store';
 /**
  * COMPONENT
  */
-const Login = (props) => {
+const AuthForm = (props) => {
   const {name, handleSubmit, error} = props;
 
   return (
     <div>
-      Login
+      Login Form
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="email">
@@ -49,21 +49,20 @@ const mapDispatch = (dispatch) => {
       evt.preventDefault();
       const formName = evt.target.name;
       const email = evt.target.email.value;
-      const role = evt.target.role;
       const password = evt.target.password.value;
-      dispatch(auth(formName, email, role, password));
+      dispatch(auth(email, password, formName));
     },
   };
 };
 
+export const Login = connect(mapLogin, mapDispatch)(AuthForm);
+
 /**
  * PROP TYPES
  */
-Login.propTypes = {
+AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object,
 };
-
-export default connect(mapLogin, mapDispatch)(Login);
