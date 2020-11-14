@@ -12,3 +12,4 @@ export {default as AllProducts} from './AllProducts';
 export {default as SingleProduct} from './SingleProduct';
 export {default as Admin} from './Admin';
 export {default as Header} from './Header';
+export {default as Checkout} from './Checkout';

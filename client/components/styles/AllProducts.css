@@ -1,0 +1,26 @@
+.product-details {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: center;
+  text-align: center;
+  flex-direction: row;
+  background-color: white;
+  max-height: fit-content;
+}
+
+#prod-head {
+  background-color: #bdd5ea;
+  margin: 1px;
+  padding: 1%;
+}
+
+#prod-head h1 {
+  text-align: center;
+  position: relative;
+}
+
+#prod-head p {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 15px;
+}
