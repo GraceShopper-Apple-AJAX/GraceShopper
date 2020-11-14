@@ -54,7 +54,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <h1 id="webtitle">Sugar Shack</h1>
     <div id="nav-links">
       <Link to="/home">Home</Link>
-      <Link to="/products">Browse Products</Link>
+      <Link to="/products">Browse</Link>
       <Link to="/home">About Us</Link>
       <Link to="/home">Contact</Link>
     </div>

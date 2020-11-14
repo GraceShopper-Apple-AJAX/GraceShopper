@@ -4,7 +4,7 @@
   margin: 0;
 }
 #logo-header {
-  padding: 1%;
+  padding: 1% 1% 0px 1%;
   /* -webkit-box-sizing: border-box;
   box-sizing: border-box; */
   display: flex;
@@ -19,11 +19,11 @@
 
 #webtitle {
   color: white;
-  /* font-family: 'Pacifico', cursive; */
   font-family: 'Comfortaa', cursive;
   text-align: center;
   font-size: 40px;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
+  font-weight: 700;
 }
 
 /* Links */
@@ -35,20 +35,21 @@
 
 #nav-links a {
   color: white;
-  padding-left: 2%;
-  padding-right: 2%;
-  font-family: 'IBM Plex Serif', serif;
+  padding: 1%;
+  font-family: 'Varela Round', sans-serif;
   font-weight: bold;
-  text-transform: uppercase;
   letter-spacing: 2px;
-  font-size: 15px;
+  font-size: 20px;
   text-align: center;
+}
+
+#nav-links a:hover {
+  background-color: #fd95b3;
 }
 
 #nav-links {
   display: flex;
   justify-content: center;
-  padding: 1%;
 }
 
 /* login/cart */
@@ -112,8 +113,7 @@ input[type='search'] {
 input[type='search']:focus {
   width: 130px;
   background-color: #fff;
-  border-color: gray;
-
+  border-color: pink;
   -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   -moz-box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
   box-shadow: 0 0 5px rgba(109, 207, 246, 0.5);
