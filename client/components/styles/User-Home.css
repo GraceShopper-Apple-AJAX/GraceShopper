@@ -14,7 +14,7 @@
   width: auto;
 }
 
-#carousel-slide {
+.carousel .slide {
   background-color: transparent;
 }
 

@@ -35,7 +35,7 @@ export const UserHome = (props) => {
               showThumbs={false}
               showStatus={false}
             >
-              <div id="carousel-slide">
+              <div>
                 <img
                   src="https://images.unsplash.com/photo-1529952711590-19ac6ec115a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"
                   id="carousel-image"
