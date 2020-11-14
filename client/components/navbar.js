@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faShoppingCart, faUserCircle} from '@fortawesome/free-solid-svg-icons';
 import './styles/Navbar.css';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
   <div id="nav-container">
     <header id="logo-header">
       <div className="search-container">
@@ -15,7 +15,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <input type="search"></input>
         </form>
       </div>
+
       <div id="right">
+        <div id="usergreet">
+          <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
+          {role === 'admin' ? <Link to="/admin">Admin Panel</Link> : null}
+        </div>
         {isLoggedIn ? (
           <div id="rightlink">
             <React.Fragment>
@@ -34,9 +39,9 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <div className="icon">
                   <FontAwesomeIcon icon={faUserCircle} />
                 </div>
-                <p>login</p>
+                <p>sign in/</p>
+                <p>register</p>
               </Link>
-              <Link to="/signup">sign up</Link>
             </React.Fragment>
           </div>
         )}
@@ -67,6 +72,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    firstName: state.user.firstName,
+    role: state.user.role,
   };
 };
 
