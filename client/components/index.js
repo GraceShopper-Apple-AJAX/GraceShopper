@@ -11,9 +11,4 @@ export {Cart} from './Cart';
 export {default as AllProducts} from './AllProducts';
 export {default as SingleProduct} from './SingleProduct';
 export {default as Admin} from './Admin';
-<<<<<<< HEAD
 export {default as Header} from './Header';
-=======
-export {default as Header} from './header';
-
->>>>>>> 800c67637ef5b0b1cc086c4888d8b9eb4da8b49e
