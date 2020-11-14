@@ -9,7 +9,12 @@ export class Cart extends React.Component {
 
     render() {
         return(
-            <h1>This is your cart!!!!</h1>
+            <div>
+                <h1>This is your cart!!!!</h1>
+                {/* This where I will put the map function to display all items in the cart */}
+            </div>
+            
+            
         )
     }
 }
