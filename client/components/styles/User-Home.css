@@ -1,0 +1,48 @@
+.front-tags {
+  display: flex;
+  justify-content: space-between;
+}
+
+#main-page-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+/* carousel */
+#carousel-image {
+  max-height: 400px;
+  width: auto;
+}
+
+#carousel-slide {
+  background-color: transparent;
+}
+
+#front-carousel {
+  width: 80%;
+}
+
+.legend {
+  background-color: transparent;
+}
+
+.carousel .slide {
+  background-color: transparent;
+}
+
+.carousel .slide .legend {
+  background-color: red;
+  width: 60%;
+  border-radius: 0;
+  opacity: 0.6;
+}
+
+.carousel:hover .slide .legend {
+  background-color: blue;
+  opacity: 0.7;
+}
+
+.carousel .control-arrow,
+.carousel.carousel-slider .control-arrow {
+  background-color: blue;
+}

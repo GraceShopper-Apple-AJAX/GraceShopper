@@ -2,6 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {auth} from '../store';
+import {Link} from 'react-router-dom';
+import './styles/auth-form.css';
 
 /**
  * COMPONENT
@@ -10,27 +12,40 @@ const AuthForm = (props) => {
   const {name, handleSubmit, error} = props;
 
   return (
-    <div>
-      Login Form
-      <form onSubmit={handleSubmit} name={name}>
+    <div id="auth-wrapper">
+      <div id="login-wrapper">
+        Login Form
+        <form onSubmit={handleSubmit} name={name}>
+          <div id="inputwrap">
+            <label htmlFor="email">Email</label>
+            <input name="email" type="text" placeholder="Email" />
+          </div>
+          <div className="inputwrap">
+            <label htmlFor="password">Password</label>
+            <input name="password" type="password" placeholder="Password" />
+          </div>
+
+          {error && error.response && <div> {error.response.data} </div>}
+
+          <button type="submit" id="login-button">
+            Log In
+          </button>
+        </form>
+        <small>Forgot your password?</small>
+        <a href="/auth/google">Login with Google</a>
+      </div>
+      <div id="register-wrapper">
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+          Why make an account? You get access to our rewards, and the option to
+          sign up for our newsletter- so that you'll be the first to discover
+          our newest flavors!
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">Log In</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">Login with Google</a>
+        <Link to="/signup">
+          <button id="reg-button" type="submit">
+            Need an Account?
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

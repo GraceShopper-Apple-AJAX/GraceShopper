@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faShoppingCart, faUserCircle} from '@fortawesome/free-solid-svg-icons';
 import './styles/Navbar.css';
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
   <div id="nav-container">
     <header id="logo-header">
       <div className="search-container">
@@ -16,6 +16,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         </form>
       </div>
       <div id="right">
+        <div id="usergreet">
+          Welcome, {isLoggedIn ? firstName : 'Guest'}
+          {role === 'admin' ? <Link to="/admin">Admin Panel</Link> : null}
+        </div>
         {isLoggedIn ? (
           <div id="rightlink">
             <React.Fragment>
@@ -35,8 +39,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                   <FontAwesomeIcon icon={faUserCircle} />
                 </div>
                 <p>login</p>
+                <p>/sign up</p>
               </Link>
-              <Link to="/signup">sign up</Link>
             </React.Fragment>
           </div>
         )}
@@ -55,8 +59,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <div id="nav-links">
       <Link to="/home">Home</Link>
       <Link to="/products">Browse</Link>
-      <Link to="/home">About Us</Link>
-      <Link to="/home">Contact</Link>
+      <Link to="/home">Blog</Link>
+      <Link to="/home">About</Link>
     </div>
   </div>
 );
@@ -67,6 +71,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id,
+    firstName: state.user.firstName,
+    role: state.user.role,
   };
 };
 
@@ -86,4 +92,5 @@ export default connect(mapState, mapDispatch)(Navbar);
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  email: PropTypes.string,
 };

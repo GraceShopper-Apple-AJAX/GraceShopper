@@ -1,0 +1,20 @@
+#each-product {
+  background-color: #bdd5ea;
+  padding: 1%;
+  width: max-content;
+  height: max-content;
+  min-height: 150px;
+  min-width: 40%;
+  flex: 0 0 45%;
+  margin: 10px;
+  padding-top: 2%;
+  display: flex;
+  flex-basis: 0;
+  justify-content: center;
+}
+
+#cartbutton {
+  height: 30px;
+  cursor: pointer;
+  justify-content: flex-end;
+}
