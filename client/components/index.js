@@ -5,7 +5,7 @@
  */
 export {default as Navbar} from './Navbar';
 export {default as UserHome} from './User-Home';
-export {Login} from './auth-form';
+export {Login} from './Auth-Form';
 export {default as Signup} from './Signup';
 export {Cart} from './Cart';
 export {default as AllProducts} from './AllProducts';

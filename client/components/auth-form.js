@@ -45,11 +45,9 @@ const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
-      const formName = evt.target.name;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      const role = evt.target.role.value
-      dispatch(auth(email, password, role, formName));
+      dispatch(auth(email, password));
     },
   };
 };
@@ -61,7 +59,6 @@ export const Login = connect(mapLogin, mapDispatch)(AuthForm);
  */
 AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object,
 };
