@@ -58,6 +58,7 @@
 .icon {
   font-size: 20px;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 #right {
@@ -73,13 +74,13 @@
   letter-spacing: 2px;
   font-size: 10px;
   text-align: center;
-  min-width: 70px;
+  max-width: 60px;
 }
 
 #usergreet {
   float: right;
   padding: 1%;
-  margin-top: 2%;
+  margin-top: 10px;
   font-family: 'IBM Plex Serif', serif;
   font-weight: bold;
   text-transform: uppercase;
