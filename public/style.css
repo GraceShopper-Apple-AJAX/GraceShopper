@@ -49,7 +49,7 @@ footer {
 .component-wrap {
   background-color: white;
   width: 90vw;
-  height: 90vh;
+  min-height: 90vh;
   margin-top: 5vh;
   margin-bottom: 5vh;
 }
