@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-evenly;
   margin-top: 3em;
+  margin-bottom: 3em;
   max-height: 100%;
 }
 
@@ -10,21 +11,25 @@
   width: 90%;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   text-align: center;
   flex-direction: column;
   margin-top: 10px;
   margin-bottom: 10px;
   width: 32%;
   height: 30em;
-  background-color: white;
-  border-style: solid;
+  background-color: #ffe2ea;
   font-family: 'IBM Plex Serif', serif;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.6);
+}
+
+#register-wrapper #reg-desc {
+  width: 60%;
 }
 
 input {
   width: 300px;
   border: 1px solid #ccc;
-  border-radius: 4px;
   box-sizing: border-box;
   resize: vertical;
   height: 40px;
@@ -39,6 +44,7 @@ label {
   margin-bottom: 10px;
 }
 
+/* buttons */
 #login-button,
 #reg-button {
   background-color: #fd779d;
@@ -47,6 +53,28 @@ label {
   border: none;
   cursor: pointer;
   text-align: center;
-  width: 30%;
-  margin-top: 20px;
+  margin-top: 30px;
+  min-width: 60px;
+}
+
+.googleButton {
+  background-color: #94baf9;
+  color: white;
+  border: none;
+  width: 200px;
+  height: 40px;
+  border-radius: 3%;
+  padding-top: 5px;
+  cursor: pointer;
+}
+
+.googleButton img {
+  width: 30px;
+  height: auto;
+}
+
+.googleButton b {
+  top: -10px;
+  left: 5px;
+  position: relative;
 }
