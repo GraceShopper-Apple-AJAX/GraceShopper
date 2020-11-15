@@ -1,32 +1,57 @@
-const router = require('express').Router()
-const {User, Product} = require('../db/models')
+const router = require('express').Router();
+const {User} = require('../db/models');
 
 router.get('/', async (req, res, next) => {
   try {
+    if (!req.user.isAdmin()) {
+      res.status(401);
+      return;
+    }
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
-      attributes: ['id', 'email'],
-    })
-    res.json(users)
+      attributes: ['id', 'firstName', 'lastName', 'email'],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
+
+router.get('/:userId', async (req, res, next) => {
+  try {
+    if (!req.user.isAdmin()) {
+      res.status(401);
+      return;
+    }
+    const user = await User.findByPk(req.params.userId, {
+      attributes: [
+        'firstName',
+        'lastName',
+        'email',
+        'address_line1',
+        'address_line2',
+        'city',
+        'state_or_province',
+        'zip',
+      ],
+    });
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('server received post signup request')
-    const user = await User.create(req.body)
-    req.login(user, err => (err ? next(err) : res.json(user)))
+    console.log('server received post signup request');
+    const user = await User.create(req.body);
+    req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
-      res.status(401).send('User already exists')
+      res.status(401).send('User already exists');
     } else {
-      next(err)
+      next(err);
     }
   }
-})
+});
 
-module.exports = router
+module.exports = router;
