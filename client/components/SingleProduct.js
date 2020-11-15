@@ -24,7 +24,8 @@ class SingleProduct extends React.Component {
     }
 
     return (
-      <div>
+      <div className="page-wrap">
+      <div className="component-wrap">
         <div className="single-product-details">
           <h1>{product.name}</h1>
           <img
@@ -47,6 +48,7 @@ class SingleProduct extends React.Component {
             </>
           )}
         </div>
+      </div>
       </div>
     );
   }

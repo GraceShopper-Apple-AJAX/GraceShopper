@@ -64,7 +64,8 @@ class Signup extends Component {
       return <Redirect to={{pathname: this.state.redirectTo}} />;
     } else {
       return (
-        <div>
+        <div className="page-wrap">
+        <div className="component-wrap">
           <h4>Fields marked with an asterisk (*) are required.</h4>
           <form>
             <div>
@@ -170,6 +171,7 @@ class Signup extends Component {
               </button>
             </div>
           </form>
+        </div>
         </div>
       );
     }
