@@ -7,7 +7,6 @@ import history from '../history';
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
 const ADD_USER = 'ADD_USER';
-
 /**
  * INITIAL STATE
  */

@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {withRouter, Route, Switch, Redirect} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import {
   Login,
   Signup,
@@ -9,20 +9,21 @@ import {
   AllProducts,
   SingleProduct,
   Cart,
-  Admin
-} from './components'
-import {me} from './store'
+  Admin,
+  SingleUser,
+} from './components';
+import {me} from './store';
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.loadInitialData();
   }
 
   render() {
-    const {isLoggedIn, role} = this.props
+    const {isLoggedIn, role} = this.props;
 
     return (
       <Switch>
@@ -31,46 +32,43 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route exact path="/admin/users/:userId" component={SingleUser} />
         <Route path="/cart" component={Cart} />
-        {role === 'admin' && (
-          <Switch>
-            <Route exact path="/admin" component={Admin} />
-          </Switch>
-        )}
+        {role === 'admin' && <Route exact path="/admin" component={Admin} />}
         <Route component={UserHome} />
       </Switch>
-    )
+    );
   }
 }
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    role: state.user.role
-  }
-}
+    role: state.user.role,
+  };
+};
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
-      dispatch(me())
-    }
-  }
-}
+      dispatch(me());
+    },
+  };
+};
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Routes))
+export default withRouter(connect(mapState, mapDispatch)(Routes));
 
 /**
  * PROP TYPES
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
+  isLoggedIn: PropTypes.bool.isRequired,
+};

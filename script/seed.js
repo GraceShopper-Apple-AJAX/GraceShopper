@@ -1,9 +1,9 @@
-const {green, red} = require('chalk')
-const {db, Product} = require('../server/db/models')
+const {green, red} = require('chalk');
+const {db, Product, User} = require('../server/db/models');
 
 const seed = async () => {
   try {
-    await db.sync({force: true})
+    await db.sync({force: true});
     const products = await Promise.all([
       Product.create({
         name: "Burnt Marshmallow S'more",
@@ -131,25 +131,137 @@ const seed = async () => {
         quantity: 100,
         imageUrl: 'https://bit.ly/3pyzdvQ',
       }),
-    ])
+    ]);
+    const users = await Promise.all([
+      User.create({
+        firstName: 'Doreen',
+        lastName: 'Casey',
+        email: 'doreencasey@kyaguru.com',
+        password: 'Stockdale',
+        mobile: '9854342913',
+        address_line1: '252 Dumont Avenue',
+        city: 'Mappsville',
+        state_or_province: 'Illinois',
+        zip: 3023,
+      }),
+      User.create({
+        firstName: 'Hillary',
+        lastName: 'Guzman',
+        email: 'hillaryguzman@kyaguru.com',
+        password: 'Chamberino',
+        mobile: '8634412365',
+        address_line1: '137 Eckford Street',
+        city: 'Barclay',
+        state_or_province: 'Maine',
+        zip: 5898,
+      }),
+      User.create({
+        firstName: 'Rosa',
+        lastName: 'Mcbride',
+        email: 'rosamcbride@kyaguru.com',
+        password: 'Clayville',
+        mobile: '8164103438',
+        address_line1: '403 Baycliff Terrace',
+        city: 'Cataract',
+        state_or_province: 'California',
+        zip: 179,
+      }),
+      User.create({
+        firstName: 'Sampson',
+        lastName: 'Maddox',
+        email: 'sampsonmaddox@kyaguru.com',
+        password: 'Crayne',
+        mobile: '8424473690',
+        address_line1: '618 Rapelye Street',
+        city: 'Hessville',
+        state_or_province: 'New Jersey',
+        zip: 7587,
+      }),
+      User.create({
+        firstName: 'Carey',
+        lastName: 'Mcdonald',
+        email: 'careymcdonald@kyaguru.com',
+        password: 'Garfield',
+        mobile: '8525542904',
+        address_line1: '433 Coleridge Street',
+        city: 'Topanga',
+        state_or_province: 'Montana',
+        zip: 2452,
+      }),
+      User.create({
+        firstName: 'Lucinda',
+        lastName: 'Fields',
+        email: 'lucindafields@kyaguru.com',
+        password: 'Lupton',
+        mobile: '8985052952',
+        address_line1: '681 Taylor Street',
+        city: 'Calverton',
+        state_or_province: 'Nevada',
+        zip: 4357,
+      }),
+      User.create({
+        firstName: 'Nadine',
+        lastName: 'Serrano',
+        email: 'nadineserrano@kyaguru.com',
+        password: 'Grill',
+        mobile: '9314913415',
+        address_line1: '729 Hinsdale Street',
+        city: 'Bancroft',
+        state_or_province: 'Arizona',
+        zip: 3773,
+      }),
+      User.create({
+        firstName: 'Muriel',
+        lastName: 'Levine',
+        email: 'muriellevine@kyaguru.com',
+        password: 'Hickory',
+        mobile: '9045773867',
+        address_line1: '679 Hull Street',
+        city: 'Tooleville',
+        state_or_province: 'Illinois',
+        zip: 1923,
+      }),
+      User.create({
+        firstName: 'Camille',
+        lastName: 'Bailey',
+        email: 'camillebailey@kyaguru.com',
+        password: 'Rockingham',
+        mobile: '8754492767',
+        address_line1: '183 Logan Street',
+        city: 'Driftwood',
+        state_or_province: 'New Jersey',
+        zip: 6450,
+      }),
+      User.create({
+        firstName: 'Elvira',
+        lastName: 'Rivera',
+        email: 'elvirarivera@kyaguru.com',
+        password: 'Winchester',
+        mobile: '8475093921',
+        address_line1: '990 Grove Place',
+        city: 'Henrietta',
+        state_or_province: 'Tennessee',
+        zip: 2526,
+      }),
+    ]);
   } catch (err) {
-    console.log(red(err))
+    console.log(red(err));
   }
-}
+};
 
-module.exports = seed
+module.exports = seed;
 // If this module is being required from another module, then we just export the
 // function, to be used as necessary. But it will run right away if the module
 // is executed directly (e.g. `node seed.js` or `npm run seed`)
 if (require.main === module) {
   seed()
     .then(() => {
-      console.log(green('Seeding success!'))
-      db.close()
+      console.log(green('Seeding success!'));
+      db.close();
     })
     .catch((err) => {
-      console.error(red('Oh noes! Something went wrong!'))
-      console.error(err)
-      db.close()
-    })
+      console.error(red('Oh noes! Something went wrong!'));
+      console.error(err);
+      db.close();
+    });
 }
