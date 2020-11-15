@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {Order_Items, Order} = require('../db/models')
+const {magenta} = require('chalk')
 
 // GET cart
 router.get('/', async (req, res, next) => {
@@ -19,24 +20,33 @@ router.get('/', async (req, res, next) => {
 // POST item to cart
 router.post('/', async (req, res, next) => {
   try {
-    const cart = await Order.findOne({
+    let cart = await Order.findOne({
       where: {
+        userId: this.userId,
         is_fulfilled: false
       }
     })
     if (cart) {
-      const itemExists = await Order_Items.getProduct()
+      const itemExists = await Order_Items.findByPk()
       if (itemExists) {
-        const item = await Order_Items.findByPk(req.params.Order_ItemsId)
-        await item.update(req.body)
-        res.json(item)
-      } else {
-        const cart = await Order.create({
-          is_fulfilled: false
+        const item = await Order_Items.findByPk(req.body.productId)
+        await item.update({
+          quantity: this.quantity++
         })
+        res.json(item)
       }
+    } else {
+      const newCart = await Order.create({
+        is_fulfilled: false,
+        userId: this.userId
+      })
+      cart = newCart
     }
-    const newItem = await Order_Items.create(req.body)
+    const newItem = await Order_Items.create({
+      quantity: req.body.quantity,
+      selected_size: req.body.selected_size,
+      historical_price: req.body.historical_price
+    })
     res.json(newItem)
   } catch (err) {
     next(err)
