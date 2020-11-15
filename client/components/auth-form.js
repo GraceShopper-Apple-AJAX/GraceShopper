@@ -42,6 +42,8 @@ const AuthForm = (props) => {
             </a>
           </div>
           <div id="register-wrapper">
+            <h4>Register an Account</h4>
+
             <div id="reg-desc">
               Why make an account? You get access to our rewards, and the option
               to sign up for our newsletter- so that you'll be the first to
