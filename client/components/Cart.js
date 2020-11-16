@@ -9,7 +9,10 @@ export class Cart extends React.Component {
 
     render() {
         return(
-            <h1>This is your cart!!!!</h1>
+             <div className="page-wrap">
+            <div className="component-wrap">
+                This is your cart
+              </div></div>
         )
     }
 }

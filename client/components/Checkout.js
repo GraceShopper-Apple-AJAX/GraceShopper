@@ -8,7 +8,9 @@ export class Checkout extends React.Component {
   }
 
   render() {
-    return <h1>This is your cart!!!!</h1>;
+    return     <div className="page-wrap">
+    <div className="component-wrap">
+      </div></div>;
   }
 }
 
