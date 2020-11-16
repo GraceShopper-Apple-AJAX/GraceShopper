@@ -19,7 +19,6 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
       <div id="right">
         <div id="usergreet">
           <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
-          {role === 'admin' ? <Link to="/admin">Admin Panel</Link> : null}
         </div>
         {isLoggedIn ? (
           <div id="rightlink">
@@ -62,6 +61,7 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
       <Link to="/products">Browse</Link>
       <Link to="/home">About Us</Link>
       <Link to="/home">Contact</Link>
+      {role === 'admin' ? <Link to="/admin">Admin Panel</Link> : null}
     </div>
   </div>
 );

@@ -131,6 +131,7 @@
   width: 18%;
   padding: 1%;
   height: 250px;
+  box-shadow: 10px 10px rgba(0, 0, 0, 0.4);
 }
 
 #meet-header {
