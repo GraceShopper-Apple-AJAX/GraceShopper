@@ -25,30 +25,39 @@ class SingleProduct extends React.Component {
 
     return (
       <div className="page-wrap">
-      <div className="component-wrap">
-        <div className="single-product-details">
-          <h1>{product.name}</h1>
-          <img
-            src={product.imageUrl}
-            className="single-product-image"
-            height="200"
-          />
-          <h3>Prices:</h3>
-          <ul>
-            <li>Scoop - ${product.scoop_price}</li>
-            <li>Pint - ${product.pint_price}</li>
-            <li>Tub - ${product.tub_price}</li>
-          </ul>
-          <h3>Description:</h3> {product.description}
-          <h3>Status:</h3> {this.getStatusMessage(product)}
-          {product.status === 'out_of_stock' ? undefined : (
-            <>
-              <h3>Quantity:</h3>
-              {product.quantity}
-            </>
-          )}
+        <div className="component-wrap">
+          <div className="single-product-details">
+            <h1>{product.name}</h1>
+            <img
+              src={product.imageUrl}
+              className="single-product-image"
+              height="200"
+            />
+            <h3>Prices:</h3>
+            <ul>
+              <li>
+                Scoop - ${product.scoop_price} ({product.scoop_quantity} scoops
+                remaining!)
+              </li>
+              <li>
+                Pint - ${product.pint_price} ({product.pint_quantity} pints
+                remaining!)
+              </li>
+              <li>
+                Tub - ${product.tub_price} ({product.tub_quantity} tubs
+                remaining!)
+              </li>
+            </ul>
+            <h3>Description:</h3> {product.description}
+            <h3>Status:</h3> {this.getStatusMessage(product)}
+            {product.status === 'out_of_stock' ? undefined : (
+              <>
+                <h3>Quantity:</h3>
+                {product.quantity}
+              </>
+            )}
+          </div>
         </div>
-      </div>
       </div>
     );
   }
