@@ -9,7 +9,7 @@ const Order = db.model('order')
 const Order_Items = db.model('Order_Items')
 const Product = db.model('product')
 
-describe('Cart Routes', () => {
+xdescribe('Cart Routes', () => {
     beforeEach(() => {
         return db.sync({force: true})
     })

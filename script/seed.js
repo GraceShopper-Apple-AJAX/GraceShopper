@@ -1,5 +1,5 @@
 const {green, red} = require('chalk');
-const {db, Product, User} = require('../server/db/models');
+const {db, Product, User, Order, Order_Items} = require('../server/db/models');
 
 const seed = async () => {
   try {
@@ -262,6 +262,68 @@ const seed = async () => {
         zip: 2526,
       }),
     ]);
+
+    const orders = await Promise.all([
+      Order.create({
+        is_fulfilled: false,
+        userId: 1
+      }),
+      Order.create({
+        is_fulfilled: false,
+        userId: 2
+      }),
+      Order.create({
+        is_fulfilled: false,
+        userId: 3
+      })
+
+    ]);
+
+    const order_items = await Promise.all([
+      Order_Items.create({
+        quantity: 4,
+        selected_size: 'pint',
+        historical_price: 2.99,
+        productId: 1,
+        orderId: 1
+      }),
+      Order_Items.create({
+        quantity: 2,
+        selected_size: 'scoop',
+        historical_price: 2.99,
+        productId: 2,
+        orderId: 1
+      }),
+      Order_Items.create({
+        quantity: 7,
+        selected_size: 'tub',
+        historical_price: 2.99,
+        productId: 3,
+        orderId: 2
+      }),
+      Order_Items.create({
+        quantity: 11,
+        selected_size: 'tub',
+        historical_price: 2.99,
+        productId: 4,
+        orderId: 2
+      }),
+      Order_Items.create({
+        quantity: 8,
+        selected_size: 'scoop',
+        historical_price: 2.99,
+        productId: 5,
+        orderId: 3
+      }),
+      Order_Items.create({
+        quantity: 10,
+        selected_size: 'pint',
+        historical_price: 2.99,
+        productId: 6,
+        orderId: 3
+      }),
+    ]);
+
   } catch (err) {
     console.log(red(err));
   }
