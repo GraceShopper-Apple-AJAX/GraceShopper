@@ -1,5 +1,4 @@
-
-import axios from 'axios'
+import axios from 'axios';
 
 // Actions
 const FETCH_CART = 'FETCH_CART';
@@ -13,7 +12,7 @@ const ADD_TO_CART = 'ADD_TO_CART';
 const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 const CLEAR_CART = 'CLEAR_CART';
 const ADD_QUANTITY = 'ADD_QUANTITY';
-const SUBTRACT_QUANTITY = 'SUBTRACT_QUANTITY'
+const SUBTRACT_QUANTITY = 'SUBTRACT_QUANTITY';
 
 // Action Creators
 export const fetchCart = (cart) => ({
@@ -26,7 +25,6 @@ export const fetchCartItems = (cart) => ({
   cart,
 });
 
-
 export const updateCart = (cart) => ({
   type: UPDATE_CART,
   cart,
@@ -34,18 +32,16 @@ export const updateCart = (cart) => ({
 
 export const addToCart = (id) => ({
   type: ADD_TO_CART,
-  id
-})
+  id,
+});
 
 export const removeFromCart = (id) => ({
   type: REMOVE_TO_CART,
-  id
-})
-
-
+  id,
+});
 
 // Thunk Creators
-export const fetchCart = cartId => {
+export const fetchCart = (cartId) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.get(`/api/{cartId}`);
@@ -56,21 +52,27 @@ export const fetchCart = cartId => {
   };
 };
 
-
-export const fetchCartItems = cartId => {
-  return async(dispatch) => {
-    try{
-      const {data} = await axios.get(`/api/{cartId}/items`)
-      dispatch(fetchCartItems(data))
-    } catch (err){
-      console.log(err)
+export const fetchCartItems = (cartId) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(`/api/{cartId}/items`);
+      dispatch(fetchCartItems(data));
+    } catch (err) {
+      console.log(err);
     }
-  }
-}
+  };
+};
 
-// export const addToCart = () => {
-
-// }
+export const addToCart = () => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.get(`/api/{cartId}/items`);
+      dispatch(fetchCartItems(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 // export const removeFromCart = () => {
 
