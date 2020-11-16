@@ -58,14 +58,14 @@ router.put('/:id', async (req, res, next) => {
   try {
     const findOrder = await Order.findAll({
       where: {
-        id: req.params.id
-      }
+        id: req.params.id,
+      },
     });
     const findProduct = await Product.findAll({
       where: {
         id: req.params.id,
-      }
-    })
+      },
+    });
     const order_id = findOrder[0].dataValues.id;
     const product_id = findProduct[0].dataValues.id;
 
@@ -76,24 +76,24 @@ router.put('/:id', async (req, res, next) => {
         productId: product_id,
       },
     });
-    await item[0].update(req.body)
+    await item[0].update(req.body);
 
     const updatedItem = await Order.findAll({
       where: {
         id: req.params.id,
-        is_fulfilled: false
+        is_fulfilled: false,
       },
       include: [
         {
-        model: Product,
-        where: {
-          id: req.params.id
+          model: Product,
+          where: {
+            id: req.params.id,
+          },
+          required: true,
         },
-        required: true
-      }
-      ]
-    })
-    res.json(updatedItem)
+      ],
+    });
+    res.json(updatedItem);
   } catch (err) {
     next(err);
   }

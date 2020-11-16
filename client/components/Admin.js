@@ -11,11 +11,13 @@ export class Admin extends React.Component {
   render() {
     const users = this.props.users;
     return (
-      <div>
+      <div className="page-wrap">
+      <div className="component-wrap">
         <h1>Welcome to the super secret Admin Panel!</h1>
         <div className="user-list">
           <UserList users={users} />
         </div>
+      </div>
       </div>
     );
   }

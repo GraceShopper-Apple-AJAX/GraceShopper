@@ -55,17 +55,25 @@ export const fetchCart = (cartId) => {
 export const fetchCartItems = (cartId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`/api/cart/{cartId}/items`);
-      dispatch(fetchCartItems(data));
+      const {data} = await axios.get(`/api/cart/${cartId}/items`);
+      dispatch(setCartItems(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-// export const addToCart = () => {
 
-// }
+export const addToCart = (cartId, item) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.post(`/api/cart/${cartId}/items`, item);
+      dispatch(setCartItems(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 // export const removeFromCart = () => {
 

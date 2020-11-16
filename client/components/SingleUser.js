@@ -22,6 +22,9 @@ class SingleUser extends React.Component {
               <h3 style={{display: 'inline-flex'}}>Email:</h3> {user.email}
             </li>
             <li>
+              <h3 style={{display: 'inline-flex'}}>Role:</h3> {user.role}
+            </li>
+            <li>
               <h3 style={{display: 'inline-flex'}}> Address:</h3>{' '}
               {user.address_line1}
               {!user.address_line2 ? undefined : (
