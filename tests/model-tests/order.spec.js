@@ -9,7 +9,7 @@ xdescribe('Order model', () => {
   });
 });
 
-xdescribe('Order_Items', () => {
+xdescribe('Order_Items model', () => {
   it('historical_price cannot be null', async () => {
     await expect(Order_Items.create({})).to.be.rejected;
   });
