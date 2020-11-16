@@ -4,7 +4,7 @@ const {expect} = require('chai')
 const db = require('../../server/db')
 const User = db.model('user')
 
-xdescribe('User model', () => {
+xdescribe('User Model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
