@@ -1,62 +1,66 @@
 import axios from 'axios';
 
 // Actions
-const SET_CART = 'SET_CART';
-const SET_CART_ITEMS = 'SET_CART_ITEMS';
+const RECEIVE_CART = 'RECEIVE_CART';
 
-const UPDATE_CART = 'UPDATE_CART';
-//add to cart in single product
-const ADD_TO_CART = 'ADD_TO_CART';
-
-//done in cart
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+//do you think this is necessary?
+const CREATE_CART = 'CREATE_CART';
+const UPDATE_CART_ITEM = 'UPDATE_CART_ITEM';
+//move to single/all product
+const ADD_CART_ITEM = 'ADD_CART_ITEM';
+const DELETE_CART_ITEM = 'DELETE_CART_ITEM';
 const CLEAR_CART = 'CLEAR_CART';
-const ADD_QUANTITY = 'ADD_QUANTITY';
-const SUBTRACT_QUANTITY = 'SUBTRACT_QUANTITY';
 
 // Action Creators
-export const setCart = (cart) => ({
-  type: SET_CART,
+export const receiveCart = (cart) => ({
+  type: RECEIVE_CART,
   cart,
 });
 
-export const setCartItems = (cart) => ({
-  type: SET_CART_ITEMS,
+//do you think this is necessary?
+export const createCart = (cart) => ({
+  type: CREATE_CART,
   cart,
 });
 
-export const updateCart = (cart) => ({
-  type: UPDATE_CART,
+export const updateCartItem = (item) => ({
+  type: UPDATE_CART_ITEM,
+  item,
+});
+
+//move to all products and single products
+export const addCartItem = (item) => ({
+  type: ADD_CART_ITEM,
+  item,
+});
+
+export const deleteCartItem = (item) => ({
+  type: DELETE_CART_ITEM,
+  item,
+});
+
+export const clearCart = (cart) => ({
+  type: CLEAR_CART,
   cart,
-});
-
-export const addToCart = (id) => ({
-  type: ADD_TO_CART,
-  id,
-});
-
-export const removeFromCart = (id) => ({
-  type: REMOVE_FROM_CART,
-  id,
 });
 
 // Thunk Creators
-export const fetchCart = (cartId) => {
+export const fetchCart = (orderId) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`/api/cart/${cartId}`);
-      dispatch(fetchCart(data));
+      const {data} = await axios.get(`/api/cart/${orderId}`);
+      dispatch(receiveCart(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-export const fetchCartItems = (cartId) => {
+export const createCart = (cart) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.get(`/api/cart/${cartId}/items`);
-      dispatch(setCartItems(data));
+      const {data} = await axios.post(`/api/cart/`, cart);
+      dispatch(createCart(data));
     } catch (err) {
       console.log(err);
     }
@@ -64,34 +68,101 @@ export const fetchCartItems = (cartId) => {
 };
 
 
-export const addToCart = (cartId, item) => {
+//move to single + all product
+export const addToCart = (orderId, productId, quantity, selected_size) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.post(`/api/cart/${cartId}/items`, item);
-      dispatch(setCartItems(data));
+      const {data} = await axios.post(`/api/cart/${orderId}/${productId}`, {
+        quantity,
+        selected_size,
+      });
+      dispatch(addCartItem(data));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-// export const removeFromCart = () => {
+export const deleteFromCart = (orderId, productId, selected_size) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.delete(`/api/cart/${orderId}/${productId}`, {
+        selected_size,
+      });
+      dispatch(deleteCartItem(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
-// }
+export const updateCart = (orderId, productId, quantity) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.put(`/api/cart/${orderId}/${productId}`, {
+        quantity,
+      });
+      dispatch(updateCartItem(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+//delete all from cart
+export const clearCart = (orderId) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.delete(`/api/cart/${orderId}`);
+      dispatch(clearCart(data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
 
 // Reducer
 const initialState = {
   items: [],
-  addedItems: [],
-  total: 0,
+  //I didn't put the cart totals in the reducer yet, wasn't sure if we needed it here or if we can put it in the component.
+  // cartTotal: 0,
 };
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
-    case SET_CART:
+    case RECEIVE_CART:
       return action.cart;
-    case UPDATE_CART:
-      return {...state, cart: action.cart};
+  //do you think this is necessary?
+    case CREATE_CART:
+      return action.cart; //or initialState?
+    case UPDATE_CART_ITEM:
+      return {
+        ...state,
+        items: [
+          ...state.items.filter(
+            (item) => item.product.id != action.item.product.id
+          ),
+          action.item,
+        ],
+      };
+      //move to single + all product
+    case ADD_CART_ITEM:
+      return {
+        ...state,
+        items: [...state.items, action.item],
+      };
+    case DELETE_CART_ITEM:
+      return {
+        ...state,
+        items: [
+          ...state.items.filter(
+            (item) => item.productId != action.item.productId
+          ),
+          action.item,
+        ],
+      };
+    case CLEAR_CART:
+      return initialState;
     default:
       return state;
   }
