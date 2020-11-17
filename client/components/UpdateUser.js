@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 // import updateUser thunk from the store
 
 class UpdateUser extends React.Component {
@@ -53,6 +54,9 @@ class UpdateUser extends React.Component {
     render() {
         return (
             <div>
+                {/* Might need to change link? */}
+                <Link to="/orders">View Past Orders</Link>
+
                 <form onSubmit={this.handleSubmit}>
                 <label htmlFor="First Name">
                         <input
