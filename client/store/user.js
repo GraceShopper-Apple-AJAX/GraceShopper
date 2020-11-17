@@ -60,11 +60,11 @@ export const addUserThunk = (user) => {
   };
 };
 
-export const updateUserThunk = (user) => {
+export const updateUserThunk = (userId, localState) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.put(`/api/users/${user.id}`, user);
-      dispatch(getUser(data));
+      const {data} = await axios.put(`/api/users/${userId}`, localState);
+      dispatch(updateUser(data));
     } catch (error) {
       console.log('error editing user info');
     }
