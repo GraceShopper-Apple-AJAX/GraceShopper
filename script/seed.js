@@ -263,7 +263,7 @@ const seed = async () => {
         state_or_province: 'Tennessee',
         zip: 2526,
       }),
-      User.Create({
+      User.create({
         firstName:"Beatrice",
         lastName:"Jaspar",
         email:"bjaspar0@bloomberg.com",
@@ -274,7 +274,7 @@ const seed = async () => {
         state_or_province:"Michigan",
         zip: 49006
      }),
-     User.Create({
+     User.create({
         firstName:"Reba",
         lastName:"Giraudeau",
         email:"rgiraudeau1@aboutads.info",
@@ -285,7 +285,7 @@ const seed = async () => {
         state_or_province:"Iowa",
         zip: 51110
      }),
-     User.Create({
+     User.create({
         firstName:"Desdemona",
         lastName:"MacRitchie",
         email:"dmacritchie2@si.edu",
@@ -296,7 +296,7 @@ const seed = async () => {
         state_or_province:"California",
         zip: 94116
      }),
-     User.Create({
+     User.create({
         firstName:"Tiertza",
         lastName:"Von Brook",
         email:"tvonbrook3@jiathis.com",
@@ -307,7 +307,7 @@ const seed = async () => {
         state_or_province:"California",
         zip: 90605
      }),
-     User.Create({
+     User.create({
         firstName:"Mathe",
         lastName:"Westhead",
         email:"mwesthead4@google.com",
@@ -318,7 +318,7 @@ const seed = async () => {
         state_or_province:"Kentucky",
         zip: 40505
      }),
-     User.Create({
+     User.create({
         firstName:"Terri",
         lastName:"Boutellier",
         email:"tboutellier5@google.com",
@@ -329,7 +329,7 @@ const seed = async () => {
         state_or_province:"Texas",
         zip: 76121
      }),
-     User.Create({
+     User.create({
         firstName:"Wanda",
         lastName:"Strafen",
         email:"wstrafen6@abc.net.au",
@@ -340,7 +340,7 @@ const seed = async () => {
         state_or_province:"Connecticut",
         zip: 06520
      }),
-     User.Create({
+     User.create({
         firstName:"Zolly",
         lastName:"Kubalek",
         email:"zkubalek7@t-online.de",
@@ -351,7 +351,7 @@ const seed = async () => {
         state_or_province:"Colorado",
         zip: 80249
      }),
-     User.Create({
+     User.create({
         firstName:"Catharine",
         lastName:"Faichnie",
         email:"cfaichnie8@w3.org",
@@ -362,7 +362,7 @@ const seed = async () => {
         state_or_province:"Oklahoma",
         zip: 73034
      }),
-     User.Create({
+     User.create({
         firstName:"Devlen",
         lastName:"Fidgett",
         email:"dfidgett9@biblegateway.com",
@@ -373,7 +373,7 @@ const seed = async () => {
         state_or_province:"New York",
         zip: 11054
      }),
-     User.Create({
+     User.create({
         firstName:"Rutter",
         lastName:"Martignon",
         email:"rmartignona@ask.com",
@@ -384,7 +384,7 @@ const seed = async () => {
         state_or_province:"Indiana",
         zip: 46805
      }),
-     User.Create({
+     User.create({
         firstName:"Godart",
         lastName:"Geibel",
         email:"ggeibelb@e-recht24.de",
@@ -395,7 +395,7 @@ const seed = async () => {
         state_or_province:"Arizona",
         zip: 85040
      }),
-     User.Create({
+     User.create({
         firstName:"Rocky",
         lastName:"Stockman",
         email:"rstockmanc@sogou.com",
@@ -406,7 +406,7 @@ const seed = async () => {
         state_or_province:"Florida",
         zip: 33134
      }),
-     User.Create({
+     User.create({
         firstName:"Truman",
         lastName:"Boys",
         email:"tboysd@mtv.com",
@@ -417,7 +417,7 @@ const seed = async () => {
         state_or_province:"California",
         zip: 90398
      }),
-     User.Create({
+     User.create({
         firstName:"Thedrick",
         lastName:"O'Hederscoll",
         email:"tohederscolle@abc.net.au",
@@ -428,7 +428,7 @@ const seed = async () => {
         state_or_province:"California",
         zip: 92191
      }),
-     User.Create({
+     User.create({
         firstName:"Dionne",
         lastName:"Langston",
         email:"dlangstonf@hc360.com",
@@ -439,7 +439,7 @@ const seed = async () => {
         state_or_province:"California",
         zip: 93726
      }),
-     User.Create({
+     User.create({
         firstName:"Millie",
         lastName:"Winear",
         email:"mwinearg@creativecommons.org",
@@ -450,7 +450,7 @@ const seed = async () => {
         state_or_province:"Missouri",
         zip: 64130
      }),
-     User.Create({
+     User.create({
         firstName:"Othilia",
         lastName:"Rosbrough",
         email:"orosbroughh@imageshack.us",
@@ -461,7 +461,7 @@ const seed = async () => {
         state_or_province:"Florida",
         zip: 32209
      }),
-     User.Create({
+     User.create({
         firstName:"Tildie",
         lastName:"Irnis",
         email:"tirnisi@earthlink.net",
@@ -472,7 +472,7 @@ const seed = async () => {
         state_or_province:"California",
         zip: 94273
      }),
-     User.Create({
+     User.create({
         firstName:"Arturo",
         lastName:"Gidney",
         email:"agidneyj@spotify.com",
