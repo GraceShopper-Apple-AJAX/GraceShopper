@@ -17,12 +17,12 @@ const AuthForm = (props) => {
             <h4>Login To Your Account</h4>
             <form onSubmit={handleSubmit} name={name} id="in-form">
               <div id="inputwrap">
-                <label htmlFor="email">Email</label>
-                <input name="email" type="text" placeholder="Email" />
+                <label htmlFor="email" id="authlabel">Email</label>
+                <input name="email" type="text" placeholder="Email" id="authinput"/>
               </div>
               <div className="inputwrap">
-                <label htmlFor="password">Password</label>
-                <input name="password" type="password" placeholder="Password" />
+                <label htmlFor="password" id="authlabel">Password</label>
+                <input name="password" type="password" placeholder="Password" id="authinput"/>
               </div>
 
             {error && error.response && <div> {error.response.data} </div>}

@@ -5,13 +5,23 @@
  */
 export {default as Navbar} from './Navbar';
 export {default as UserHome} from './User-Home';
+export {default as Header} from './Header';
+//login/signup
 export {Login} from './auth-form';
 export {default as Signup} from './Signup';
+//cart
 export {Cart} from './Cart';
+
+//products
 export {default as AllProducts} from './AllProducts';
 export {default as SingleProduct} from './SingleProduct';
+//admin
 export {default as Admin} from './Admin';
-export {default as Header} from './Header';
-export {default as Checkout} from './Checkout';
 export {default as SingleUser} from './SingleUser';
+
+//checkout
+export {default as Checkout} from './Checkout';
+export {default as Payment} from './Payment'
+export {default as Success} from './Success'
+export {default as Confirmation} from './Confirmation'
 
