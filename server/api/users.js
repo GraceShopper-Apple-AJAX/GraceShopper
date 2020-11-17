@@ -32,9 +32,7 @@ const checkJwt = jwt({
   algorithms: ['RS256']
 });
 
-// app.use(checkJwt);
-
-router.get('/', async (req, res, next) => {
+router.get('/', checkJwt, async (req, res, next) => {
   try {
     if (!req.user.isAdmin()) {
       res.status(401);
@@ -49,7 +47,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', checkJwt, async (req, res, next) => {
   try {
     if (!req.user.isAdmin()) {
       res.status(401);
