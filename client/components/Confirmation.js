@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, List} from 'semantic-ui-react';
 
 class Confirmation extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
   saveAndContinue = (e) => {
@@ -61,11 +61,11 @@ class Confirmation extends Component {
           </List.Item>
         </List>
 
-
-
         <Button onClick={this.back}>Back</Button>
-        <Button onClick={this.saveAndContinue} type="submit">Confirm</Button>
-</div>
+        <Button onClick={this.saveAndContinue} type="submit">
+          Confirm
+        </Button>
+      </div>
     );
   }
 }

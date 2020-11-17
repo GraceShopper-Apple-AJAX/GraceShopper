@@ -8,14 +8,10 @@ const UPDATE_ORDER = 'UPDATE_ORDER';
 const ORDER_SUCCESS = 'ORDER_SUCCESS';
 
 //action creators
-const orderSuccess = order => ({ type: ORDER_SUCCESS, order })
-
+const orderSuccess = (order) => ({type: ORDER_SUCCESS, order});
 
 //thunk creators
 
-
 //initial state
 
-
 //reducers
-

@@ -4,7 +4,12 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faShoppingCart, faUserCircle, faSignInAlt, faSignOutAlt} from '@fortawesome/free-solid-svg-icons';
+import {
+  faShoppingCart,
+  faUserCircle,
+  faSignInAlt,
+  faSignOutAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import './styles/Navbar.css';
 
 const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
@@ -15,8 +20,6 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
           <input type="search"></input>
         </form>
       </div>
-
-
 
       <div id="right">
         {isLoggedIn ? (
@@ -43,7 +46,7 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
             </React.Fragment>
           </div>
         )}
-               <div id="rightlink">
+        <div id="rightlink">
           <Link to="/myaccount">
             <div className="icon">
               <FontAwesomeIcon icon={faUserCircle} />
@@ -62,8 +65,8 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
       </div>
     </header>
     <div id="usergreet">
-          <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
-        </div>
+      <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
+    </div>
     <h1 id="webtitle">Sugar Shack</h1>
     <div id="nav-links">
       <Link to="/home">Home</Link>

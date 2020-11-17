@@ -12,7 +12,7 @@ import {
   Admin,
   SingleUser,
   Checkout,
-  MyAccount
+  MyAccount,
 } from './components';
 import {me} from './store';
 

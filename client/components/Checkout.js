@@ -1,40 +1,38 @@
 import React, {Component} from 'react';
-import { updateUserThunk } from "../store/user"
+import {updateUserThunk} from '../store/user';
 import ProgressBar from './Progress-bar';
 import Details from './Details';
 import Confirmation from './Confirmation';
 import Success from './Success';
 import Payment from './Payment';
-import { connect } from "react-redux";
-
+import {connect} from 'react-redux';
 
 import './styles/Checkout.css';
 
 export class Checkout extends Component {
- constructor(props) {
+  constructor(props) {
     super(props);
 
-  this.state = {
-    step: 1,
-    address1: '',
-    address2: '',
-    city: '',
-    country: '',
-    zip: '',
-    state_or_province: '',
-    //payment
-    cc_type: '',
-    cc_number_secure: '',
-    cc_security_code: '',
-    cc_expiration: '',
-    cardholder_name: '',
-  };
-  this.nextStep = this.nextStep.bind(this);
-  this.prevStep = this.prevStep.bind(this);
-  this.handleChange = this.handleChange.bind(this);
-  this.handleSubmit = this.handleSubmit.bind(this);
-
-}
+    this.state = {
+      step: 1,
+      address1: '',
+      address2: '',
+      city: '',
+      country: '',
+      zip: '',
+      state_or_province: '',
+      //payment
+      cc_type: '',
+      cc_number_secure: '',
+      cc_security_code: '',
+      cc_expiration: '',
+      cardholder_name: '',
+    };
+    this.nextStep = this.nextStep.bind(this);
+    this.prevStep = this.prevStep.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
   nextStep = () => {
     const {step} = this.state;
@@ -111,9 +109,9 @@ export class Checkout extends Component {
                     <div id="checkwraps">
                       <div id="progress">
                         <ProgressBar
-                          bgcolor={'#FEC3D4'}
-                          percentage={'25'}
-                          label={'Details'}
+                          bgcolor="#FEC3D4"
+                          percentage="25"
+                          label="Details"
                           className="checkout-forms"
                         />
                       </div>
@@ -130,9 +128,9 @@ export class Checkout extends Component {
                     <div id="checkwraps">
                       <div id="progress">
                         <ProgressBar
-                          bgcolor={'#FDADC3'}
-                          percentage={'50'}
-                          label={'Payment'}
+                          bgcolor="#FDADC3"
+                          percentage="50"
+                          label="Payment"
                           className="checkout-forms"
                         />
                       </div>
@@ -149,9 +147,9 @@ export class Checkout extends Component {
                     <div id="checkwraps">
                       <div id="progress">
                         <ProgressBar
-                          bgcolor={'#FD95B3'}
-                          percentage={'75'}
-                          label={'Confirm'}
+                          bgcolor="#FD95B3"
+                          percentage="75"
+                          label="Confirm"
                         />
                       </div>
                       <Confirmation
@@ -166,9 +164,9 @@ export class Checkout extends Component {
                     <div id="checkwraps">
                       <div id="progress">
                         <ProgressBar
-                          bgcolor={'#FB2562'}
-                          percentage={'100'}
-                          label={'Done'}
+                          bgcolor="#FB2562"
+                          percentage="100"
+                          label="Done"
                         />
                       </div>
                       <Success />
@@ -188,6 +186,5 @@ const mapDispatch = (dispatch) => {
     updateUserThunk: (user) => dispatch(updateUserThunk(user)),
   };
 };
-
 
 export default connect(null, mapDispatch)(Checkout);

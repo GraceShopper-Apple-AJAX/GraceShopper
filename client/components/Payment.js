@@ -20,7 +20,7 @@ class Payment extends Component {
     const {values, handleSubmit} = this.props;
 
     return (
-      <Form color="blue" >
+      <Form color="blue">
         <h1 className="ui centered">Enter Personal Details</h1>
         <Form.Field>
           <label>Credit card type</label>

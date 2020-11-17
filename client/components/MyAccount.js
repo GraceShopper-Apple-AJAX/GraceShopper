@@ -12,12 +12,7 @@ import './styles/User-Home.css';
 export const MyAccount = (props) => {
   const {isLoggedIn, firstName, role} = props;
 
-  return (
-    <div>
-      my orders
-      edit account
-    </div>
-  );
+  return <div>my orders edit account</div>;
 };
 
 /**
