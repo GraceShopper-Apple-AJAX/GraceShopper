@@ -7,6 +7,7 @@ import history from '../history';
 const GET_USER = 'GET_USER';
 const REMOVE_USER = 'REMOVE_USER';
 const ADD_USER = 'ADD_USER';
+
 /**
  * INITIAL STATE
  */
@@ -53,6 +54,17 @@ export const addUserThunk = (user) => {
       dispatch(addUser(data));
     } catch (error) {
       console.log('error POSTING user', user);
+    }
+  };
+};
+
+export const updateUserThunk = (user) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.put(`/api/users/${user.id}`, user);
+      dispatch(getUser(data));
+    } catch (error) {
+      console.log('error editing user info');
     }
   };
 };

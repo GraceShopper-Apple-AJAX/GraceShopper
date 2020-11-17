@@ -45,13 +45,13 @@ class Signup extends Component {
           !response.data.error &&
           this.state.password === this.state.confirmPassword
         ) {
-          console.log('success - user created');
+          alert('Account Successfully Created!');
+
           this.setState({
-            //redirect to login page
-            redirectTo: '/login',
+            redirectTo: '/home',
           });
         } else {
-          console.log('username already taken');
+          console.log('email already taken');
         }
       })
       .catch((error) => {
@@ -65,113 +65,113 @@ class Signup extends Component {
     } else {
       return (
         <div className="page-wrap">
-        <div className="component-wrap">
-          <h4>Fields marked with an asterisk (*) are required.</h4>
-          <form>
-            <div>
+          <div className="component-wrap">
+            <h4>Fields marked with an asterisk (*) are required.</h4>
+            <form>
               <div>
-                <label htmlFor="firstName">First Name</label>
+                <div>
+                  <label htmlFor="firstName">First Name</label>
+                </div>
+                <div>
+                  <input
+                    className="form-input"
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="firstName"
+                    value={this.state.firstName}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
               <div>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="firstName"
-                  value={this.state.firstName}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <div>
-                <label htmlFor="lastName">Last Name</label>
-              </div>
-              <div>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="lastName"
-                  value={this.state.lastName}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <div>
-                <label htmlFor="email">Email</label>
+                <div>
+                  <label htmlFor="lastName">Last Name</label>
+                </div>
+                <div>
+                  <input
+                    className="form-input"
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="lastName"
+                    value={this.state.lastName}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
               <div>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="email"
-                  name="email"
-                  placeholder="email"
-                  value={this.state.email}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <div>
-                <label htmlFor="mobile">Phone Number</label>
-              </div>
-              <div>
-                <input
-                  className="form-input"
-                  type="text"
-                  id="mobile"
-                  name="mobile"
-                  placeholder="mobile"
-                  value={this.state.mobile}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <div>
-              <div>
-                <label htmlFor="password">Password: </label>
+                <div>
+                  <label htmlFor="email">Email</label>
+                </div>
+                <div>
+                  <input
+                    className="form-input"
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="email"
+                    value={this.state.email}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
               <div>
-                <input
-                  className="form-input"
-                  placeholder="password"
-                  type="password"
-                  name="password"
-                  value={this.state.password}
-                  onChange={this.handleChange}
-                />
+                <div>
+                  <label htmlFor="mobile">Phone Number</label>
+                </div>
+                <div>
+                  <input
+                    className="form-input"
+                    type="text"
+                    id="mobile"
+                    name="mobile"
+                    placeholder="mobile"
+                    value={this.state.mobile}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div>
               <div>
-                <label className="form-label" htmlFor="confirmPassword">
-                  Confirm Password:{' '}
-                </label>
+                <div>
+                  <label htmlFor="password">Password: </label>
+                </div>
+                <div>
+                  <input
+                    className="form-input"
+                    placeholder="password"
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
               <div>
-                <input
-                  className="form-input"
-                  placeholder="confirm password"
-                  type="password"
-                  name="confirmPassword"
-                  value={this.state.confirmPassword}
-                  onChange={this.handleChange}
-                />
+                <div>
+                  <label className="form-label" htmlFor="confirmPassword">
+                    Confirm Password:{' '}
+                  </label>
+                </div>
+                <div>
+                  <input
+                    className="form-input"
+                    placeholder="confirm password"
+                    type="password"
+                    name="confirmPassword"
+                    value={this.state.confirmPassword}
+                    onChange={this.handleChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div>
-              <div />
-              <button onClick={this.handleSubmit} type="submit">
-                Sign up
-              </button>
-            </div>
-          </form>
-        </div>
+              <div>
+                <div />
+                <button onClick={this.handleSubmit} type="submit">
+                  Sign up
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       );
     }

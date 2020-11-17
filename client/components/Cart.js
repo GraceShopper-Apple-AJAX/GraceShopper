@@ -6,35 +6,44 @@ import {Link} from 'react-router-dom';
 import './styles/Cart.css';
 
 export class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  //   constructor(props) {
+  //     super(props);
+  //   }
 
   render() {
+    const order = this.props.order;
+    const orderItem = this.props.order_items;
     return (
       <div id="cartpage-wrapper">
-        <div id="carttitle"><h3>My Cart</h3><Link to="/products">Continue Shopping</Link></div>
+        <div id="carttitle">
+          <h3>My Cart</h3>
+          <Link to="/products">Continue Shopping</Link>
+        </div>
 
         <div id="cart-wrap">
           <div id="cartitem-wrapper">
             <table id="itemtable">
               <tbody>
                 <tr>
-                <th width="100px"></th>
-                  <th width="120px" className="centeralign">Item Name</th>
+                  <th width="100px"></th>
+                  <th width="120px" className="centeralign">
+                    Item Name
+                  </th>
                   <th>Size</th>
                   <th>Price</th>
-                  <th width="40px" className="rightalign">Qty</th>
+                  <th width="40px" className="rightalign">
+                    Qty
+                  </th>
                   <th></th>
                 </tr>
                 <tr>
-                    <td>
-                <img src='https://images.unsplash.com/photo-1569010015992-4a21f02d9e56?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80' id="checkout-thumb"></img>
-                </td>
+                  <td>
+                    <img src="https://bit.ly/2Uw2GZ1" id="checkout-thumb"></img>
+                  </td>
                   <td>item nameeeee</td>
                   <td>Pint</td>
                   <td>$3.99</td>
-                  <td>-  1  +</td>
+                  <td>- 1 +</td>
                   <td>X</td>
                 </tr>
               </tbody>
@@ -68,7 +77,6 @@ export class Cart extends React.Component {
             </Link>
           </div>
         </div>
-
       </div>
     );
   }

@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Order = db.define('order', {
   total_price: {
@@ -8,8 +8,13 @@ const Order = db.define('order', {
   is_fulfilled: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: false
+    defaultValue: false,
   },
-})
+});
 
-module.exports = Order
+// Order.prototype.calculateTotal = async function() {
+// const items = Order.getOrder_Items()
+// const total = items *
+// }
+
+module.exports = Order;

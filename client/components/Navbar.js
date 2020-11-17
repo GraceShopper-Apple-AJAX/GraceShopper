@@ -4,7 +4,12 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faShoppingCart, faUserCircle} from '@fortawesome/free-solid-svg-icons';
+import {
+  faShoppingCart,
+  faUserCircle,
+  faSignInAlt,
+  faSignOutAlt,
+} from '@fortawesome/free-solid-svg-icons';
 import './styles/Navbar.css';
 
 const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
@@ -17,15 +22,12 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
       </div>
 
       <div id="right">
-        <div id="usergreet">
-          <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
-        </div>
         {isLoggedIn ? (
           <div id="rightlink">
             <React.Fragment>
               <a href="#" onClick={handleClick}>
                 <div className="icon">
-                  <FontAwesomeIcon icon={faUserCircle} />
+                  <FontAwesomeIcon icon={faSignOutAlt} />
                 </div>
                 <p>logout</p>
               </a>
@@ -36,7 +38,7 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
             <React.Fragment>
               <Link to="/login">
                 <div className="icon">
-                  <FontAwesomeIcon icon={faUserCircle} />
+                  <FontAwesomeIcon icon={faSignInAlt} />
                 </div>
                 <p>sign in/</p>
                 <p>register</p>
@@ -44,6 +46,14 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
             </React.Fragment>
           </div>
         )}
+        <div id="rightlink">
+          <Link to="/myaccount">
+            <div className="icon">
+              <FontAwesomeIcon icon={faUserCircle} />
+            </div>
+            <p>Account</p>
+          </Link>
+        </div>
         <div id="rightlink">
           <Link to="/cart">
             <div className="icon">
@@ -54,7 +64,9 @@ const Navbar = ({handleClick, isLoggedIn, firstName, role}) => (
         </div>
       </div>
     </header>
-
+    <div id="usergreet">
+      <h3>Welcome, {isLoggedIn ? firstName : 'Guest'}</h3>
+    </div>
     <h1 id="webtitle">Sugar Shack</h1>
     <div id="nav-links">
       <Link to="/home">Home</Link>

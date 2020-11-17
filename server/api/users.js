@@ -2,7 +2,6 @@ const router = require('express').Router();
 const {User} = require('../db/models');
 const jwt = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
-const app = require('../../server/index')
 
 router.post('/', async (req, res, next) => {
   try {
@@ -66,6 +65,16 @@ router.get('/:userId', checkJwt, async (req, res, next) => {
         'zip',
       ],
     });
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    await User.update(req.body);
     res.json(user);
   } catch (err) {
     next(err);
