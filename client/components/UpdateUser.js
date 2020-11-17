@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import updateUserThunk from '../store/user';
+import {auth} from '../store';
 
 class UpdateUser extends React.Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class UpdateUser extends React.Component {
     async handleSubmit (event) {
         event.preventDefault();
         try {
+            console.log(this.props)
             await this.props.update(this.props.user.id, this.state);
             this.setState({
                 firstName: '',
@@ -47,6 +49,7 @@ class UpdateUser extends React.Component {
                 password: ''
             });
         } catch (err) {
+            console.log(this.props)
             console.log(err);
         }
     }
@@ -54,9 +57,6 @@ class UpdateUser extends React.Component {
     render() {
         return (
             <div>
-                {/* Might need to change link? */}
-                <Link to="/orders">View Past Orders</Link>
-
                 <form onSubmit={this.handleSubmit}>
                 <label htmlFor="First Name">
                         <input

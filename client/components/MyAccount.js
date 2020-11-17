@@ -21,6 +21,8 @@ export const MyAccount = (props) => {
           <h3>EDIT ACCOUNT</h3>
           <UpdateUser />
           <h3>ORDER HISTORY</h3>
+          {/* Might need to change link? */}
+          <Link to="/orders">View Past Orders</Link>
         </div>
       ) : (
         <div>
