@@ -10,33 +10,84 @@ const Order_Items = db.model('Order_Items')
 const Product = db.model('product')
 
 xdescribe('Cart Routes', () => {
-    beforeEach(() => {
-        return db.sync({force: true})
+    beforeEach(async () => {
+        await db.sync({ force: true })
+        const user = await User.Create([
+            {
+                id: 3000,
+                firstName: "Shamus",
+                lastName: "Sawter",
+                email: "ssawter0@163.com",
+                password: "A3LOO0G",
+                mobile: "4253097641",
+                address_line1: "038 Algoma Plaza",
+                city: "Seattle",
+                state_or_province: "Washington",
+                zip: 98115
+              }
+        ])
+
+        const order = await Order.Create([
+            {
+                id: 9000,
+                is_fullfilled: false,
+                userId: 3000
+            }
+        ])
+
+        const order_items = await Order_Items.bulkCreate([
+            {
+                quantity: 4,
+                selected_size: 'pint',
+                historical_price: 2.99,
+                productId: 1,
+                orderId: 9000
+            },
+            {
+                quantity: 7,
+                selected_size: 'tub',
+                historical_price: 2.99,
+                productId: 3,
+                orderId: 9000
+            },
+            {
+                quantity: 8,
+                selected_size: 'scoop',
+                historical_price: 2.99,
+                productId: 5,
+                orderId: 3
+            }
+
+        ])
     })
 
     describe('/api/cart/:id', () => {
-        beforeEach(() => {
-            return Order.create({
-                is_fulfilled: false
-            })
-        })
 
         describe('GET /api/cart/:id', () => {
-            it('responds with an empty array at first', async () => {
-                const res = await request(app)
-                    .get('/api/cart')
-                    .expect(200)
-                    .expect(res.body).to.eql([])
-            })
-            
-            it('responds with Order after items have been added to cart', () => {
-
+            it('responds with Order and its items', async () => {
+                const response = await app.get('/api/cart/:id')
+                expect(response.status).to.equal(200)
+                expect(response.body).to.be.an('array')
+                // map through order_items, keep productId's, then convert id's to names
+                // expect(products).to.include('ice cream name')
+                // expect(products).to.include('ice cream name')
             })
         })
 
         describe('POST /api/cart/:id', () => {
-            it('adds an item to your cart and responds with the item', () => {
-
+            it('responds with 201 and the newly added item', async () => {
+                const response = await app.post('/api/cart/:id').send({
+                    quantity: 3,
+                    selected_size: 'pint',
+                    historical_price: 2.99,
+                    productId: 9,
+                    orderId: 9000
+                })
+                expect(response.status).to.equal(201)
+                expect(response.body).to.be.an('object')
+                expect(response.body.productId).to.equal(9)
+                const itemsBeforePost = Object.keys(Order_Items)
+                //unfinished
             })
         })
 

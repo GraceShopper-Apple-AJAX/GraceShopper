@@ -6,7 +6,7 @@ const db = require('../../server/db')
 const app = require('../../server/index')
 const User = db.model('user')
 
-xdescribe('User routes', () => {
+xdescribe('User Routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
