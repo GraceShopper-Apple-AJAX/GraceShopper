@@ -17,7 +17,6 @@ const Order_Items = db.define('Order_Items', {
 
   historical_price: {
     type: Sequelize.FLOAT,
-    allowNull: false,
   },
 });
 

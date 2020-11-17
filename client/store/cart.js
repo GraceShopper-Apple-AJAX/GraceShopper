@@ -67,7 +67,6 @@ export const createCart = (cart) => {
   };
 };
 
-
 //move to single + all product
 export const addToCart = (orderId, productId, quantity, selected_size) => {
   return async (dispatch) => {
@@ -84,6 +83,7 @@ export const addToCart = (orderId, productId, quantity, selected_size) => {
 };
 
 export const deleteFromCart = (orderId, productId, selected_size) => {
+
   return async (dispatch) => {
     try {
       const {data} = await axios.delete(`/api/cart/${orderId}/${productId}`, {

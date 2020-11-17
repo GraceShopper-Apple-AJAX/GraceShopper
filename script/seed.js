@@ -1,6 +1,7 @@
 const {green, red} = require('chalk');
 const {db, Product, User, Order, Order_Items} = require('../server/db/models');
 
+
 const seed = async () => {
   try {
     await db.sync({force: true});
@@ -76,7 +77,6 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        quantity: 100,
         imageUrl: 'https://bit.ly/3pyzdvQ',
       }),
 
@@ -265,21 +265,63 @@ const seed = async () => {
         zip: 2526,
       }),
     ]);
-
+    
     const orders = await Promise.all([
       Order.create({
+        total_price: 0,
         is_fulfilled: false,
-        userId: 1
+        userId: 3,
       }),
       Order.create({
-        is_fulfilled: false,
-        userId: 2
+      total_price: 72.14,
+      is_fulfilled: false,
+      userId: 4
       }),
       Order.create({
-        is_fulfilled: false,
-        userId: 3
+      total_price: 130.55
+      is_fulfilled: false,
+      userId: 7
+      }),
+      Order.create({
+      total_price: 65.00,
+      is_fulfilled: false,
+      userId: 1
+      }),
+      Order.create({
+      total_price: 214.22,
+      is_fulfilled: true,
+      userId: 3
+      }),
+      Order.create({
+      total_price:81.14,
+      is_fulfilled: false,
+      userId: 9
+      }),
+      Order.create({
+      total_price:108.72,
+      is_fulfilled: false,
+      userId: 5
+      }),
+      Order.create({
+      total_price: 43.19,
+      is_fulfilled: false,
+      userId: 1
+      }),
+      Order.create({
+      total_price:37.86,
+      is_fulfilled: false,
+      userId: 6
+      }),
+      Order.create({
+      total_price: 22.26,
+      is_fulfilled: false,
+      userId: 10
+      }),
+      Order.create({
+      total_price: 137.04,
+      is_fulfilled: false,
+      userId: 5
       })
-
     ]);
 
     const order_items = await Promise.all([
@@ -295,14 +337,14 @@ const seed = async () => {
         selected_size: 'scoop',
         historical_price: 2.99,
         productId: 2,
-        orderId: 1
+        orderId: 4
       }),
       Order_Items.create({
         quantity: 7,
         selected_size: 'tub',
         historical_price: 2.99,
         productId: 3,
-        orderId: 2
+        orderId: 7
       }),
       Order_Items.create({
         quantity: 11,
@@ -323,10 +365,9 @@ const seed = async () => {
         selected_size: 'pint',
         historical_price: 2.99,
         productId: 6,
-        orderId: 3
+        orderId: 4
       }),
     ]);
-
   } catch (err) {
     console.log(red(err));
   }
