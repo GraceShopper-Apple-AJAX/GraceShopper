@@ -1,18 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {Route} from 'react-router-dom';
+import {Link, Route, Redirect} from 'react-router-dom';
 
+import {Login} from './auth-form';
 import './styles/User-Home.css';
 
 /**
  * COMPONENT
  */
 export const MyAccount = (props) => {
-  const {isLoggedIn, firstName, role} = props;
+  const {isLoggedIn} = props;
 
-  return <div>my orders edit account</div>;
+  return (
+    <div>
+      {isLoggedIn ? (
+        <div>
+          Welcome to account settings<h3>my account</h3>
+          <h3>EDIT ACCOUNT</h3>
+          <h3>ORDER HISTORY</h3>
+        </div>
+      ) : (
+        <div>
+          <h1>You are not logged in.</h1>
+          <Login />
+        </div>
+      )}
+    </div>
+  );
 };
 
 /**
@@ -32,4 +47,5 @@ export default connect(mapState)(MyAccount);
  */
 MyAccount.propTypes = {
   email: PropTypes.string,
+  isLoggedIn: PropTypes.bool.isRequired,
 };

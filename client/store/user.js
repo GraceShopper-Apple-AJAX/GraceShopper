@@ -58,16 +58,16 @@ export const addUserThunk = (user) => {
   };
 };
 
-export const updateUserThunk = (user) =>{
+export const updateUserThunk = (user) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.put(`/api/users/${user.id}`, user);
+      const {data} = await axios.put(`/api/users/${user.id}`, user);
       dispatch(getUser(data));
     } catch (error) {
-      console.log("error editing user info");
+      console.log('error editing user info');
     }
   };
-}
+};
 
 export const logout = () => async (dispatch) => {
   try {

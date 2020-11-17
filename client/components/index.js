@@ -9,7 +9,9 @@ export {default as Header} from './Header';
 //login/signup
 export {Login} from './auth-form';
 export {default as Signup} from './Signup';
-export {default as MyAccount} from './MyAccount';
+export {default as //user panel
+MyAccount} from './MyAccount';
+
 //cart
 export {Cart} from './Cart';
 

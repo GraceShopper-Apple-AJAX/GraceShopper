@@ -1,10 +1,9 @@
-import React from "react";
+import React from 'react';
 
 import './styles/Checkout.css';
 
-
 const ProgressBar = (props) => {
-  const { bgcolor, percentage, label } = props;
+  const {bgcolor, percentage, label} = props;
 
   const containerStyles = {
     height: 40,
@@ -29,13 +28,12 @@ const ProgressBar = (props) => {
   };
 
   return (
-    <div style={containerStyles} >
+    <div style={containerStyles}>
       <div style={fillerStyles} id="containerStyle">
         <span style={labelStyles}>{`${label}`}</span>
       </div>
     </div>
   );
 };
-
 
 export default ProgressBar;

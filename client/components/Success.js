@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-class Success extends Component{
-    render(){
-        return(
-            <div>
-                <h1>Order Successful</h1>
-                <div>
-                    Your order Id:
-
-                </div>
-            </div>
-        )
-    }
+class Success extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Order Successful</h1>
+        <div>Your order Id:</div>
+      </div>
+    );
+  }
 }
 
-export default Success
+export default Success;

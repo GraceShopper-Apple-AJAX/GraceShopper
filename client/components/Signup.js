@@ -51,7 +51,7 @@ class Signup extends Component {
             redirectTo: '/home',
           });
         } else {
-          console.log('username already taken');
+          console.log('email already taken');
         }
       })
       .catch((error) => {
