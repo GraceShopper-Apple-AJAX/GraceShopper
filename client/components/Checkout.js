@@ -70,10 +70,6 @@ export class Checkout extends Component {
   render() {
     const {step} = this.state;
     const {
-      firstName,
-      lastName,
-      email,
-      mobile,
       address1,
       address2,
       city,
@@ -89,10 +85,6 @@ export class Checkout extends Component {
     } = this.state;
 
     const values = {
-      firstName,
-      lastName,
-      email,
-      mobile,
       address1,
       address2,
       city,

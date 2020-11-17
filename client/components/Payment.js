@@ -40,7 +40,7 @@ class Payment extends Component {
         </Form.Field>
 
         <Button onClick={this.back}>Back</Button>
-        <Button onClick={this.saveAndContinue} type="submit">Next</Button>
+        <Button onClick={this.saveAndContinue}>Next</Button>
       </Form>
     );
   }

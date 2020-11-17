@@ -18,10 +18,6 @@ class Confirmation extends Component {
   render() {
     const {
       values: {
-        firstName,
-        lastName,
-        email,
-        mobile,
         address1,
         address2,
         city,

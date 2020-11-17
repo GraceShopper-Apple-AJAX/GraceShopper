@@ -45,10 +45,10 @@ class Signup extends Component {
           !response.data.error &&
           this.state.password === this.state.confirmPassword
         ) {
-          console.log('success - user created');
+          alert('Account Successfully Created!');
+
           this.setState({
-            //redirect to login page
-            redirectTo: '/login',
+            redirectTo: '/home',
           });
         } else {
           console.log('username already taken');
@@ -57,6 +57,7 @@ class Signup extends Component {
       .catch((error) => {
         console.log(error);
       });
+
   }
 
   render() {
