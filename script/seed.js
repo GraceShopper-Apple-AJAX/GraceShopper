@@ -1,7 +1,6 @@
 const {green, red} = require('chalk');
 const {db, Product, User, Order, Order_Items} = require('../server/db/models');
 
-
 const seed = async () => {
   try {
     await db.sync({force: true});
@@ -265,7 +264,7 @@ const seed = async () => {
         zip: 2526,
       }),
     ]);
-    
+
     const orders = await Promise.all([
       Order.create({
         total_price: 0,
@@ -273,55 +272,55 @@ const seed = async () => {
         userId: 3,
       }),
       Order.create({
-      total_price: 72.14,
-      is_fulfilled: false,
-      userId: 4
+        total_price: 72.14,
+        is_fulfilled: false,
+        userId: 4,
       }),
       Order.create({
-      total_price: 130.55
-      is_fulfilled: false,
-      userId: 7
+        total_price: 130.55,
+        is_fulfilled: false,
+        userId: 7,
       }),
       Order.create({
-      total_price: 65.00,
-      is_fulfilled: false,
-      userId: 1
+        total_price: 65.0,
+        is_fulfilled: false,
+        userId: 1,
       }),
       Order.create({
-      total_price: 214.22,
-      is_fulfilled: true,
-      userId: 3
+        total_price: 214.22,
+        is_fulfilled: true,
+        userId: 3,
       }),
       Order.create({
-      total_price:81.14,
-      is_fulfilled: false,
-      userId: 9
+        total_price: 81.14,
+        is_fulfilled: false,
+        userId: 9,
       }),
       Order.create({
-      total_price:108.72,
-      is_fulfilled: false,
-      userId: 5
+        total_price: 108.72,
+        is_fulfilled: false,
+        userId: 5,
       }),
       Order.create({
-      total_price: 43.19,
-      is_fulfilled: false,
-      userId: 1
+        total_price: 43.19,
+        is_fulfilled: false,
+        userId: 1,
       }),
       Order.create({
-      total_price:37.86,
-      is_fulfilled: false,
-      userId: 6
+        total_price: 37.86,
+        is_fulfilled: false,
+        userId: 6,
       }),
       Order.create({
-      total_price: 22.26,
-      is_fulfilled: false,
-      userId: 10
+        total_price: 22.26,
+        is_fulfilled: false,
+        userId: 10,
       }),
       Order.create({
-      total_price: 137.04,
-      is_fulfilled: false,
-      userId: 5
-      })
+        total_price: 137.04,
+        is_fulfilled: false,
+        userId: 5,
+      }),
     ]);
 
     const order_items = await Promise.all([
@@ -330,42 +329,42 @@ const seed = async () => {
         selected_size: 'pint',
         historical_price: 2.99,
         productId: 1,
-        orderId: 1
+        orderId: 1,
       }),
       Order_Items.create({
         quantity: 2,
         selected_size: 'scoop',
         historical_price: 2.99,
         productId: 2,
-        orderId: 4
+        orderId: 4,
       }),
       Order_Items.create({
         quantity: 7,
         selected_size: 'tub',
         historical_price: 2.99,
         productId: 3,
-        orderId: 7
+        orderId: 7,
       }),
       Order_Items.create({
         quantity: 11,
         selected_size: 'tub',
         historical_price: 2.99,
         productId: 4,
-        orderId: 2
+        orderId: 2,
       }),
       Order_Items.create({
         quantity: 8,
         selected_size: 'scoop',
         historical_price: 2.99,
         productId: 5,
-        orderId: 3
+        orderId: 3,
       }),
       Order_Items.create({
         quantity: 10,
         selected_size: 'pint',
         historical_price: 2.99,
         productId: 6,
-        orderId: 4
+        orderId: 4,
       }),
     ]);
   } catch (err) {
