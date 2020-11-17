@@ -46,7 +46,13 @@ router.post('/', async (req, res, next) => {
         productId: productId,
       });
     }
-    const updatedCart = await Order.findOne({include: {model: Order_Items}});
+    const updatedCart = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        is_fulfilled: false,
+      },
+      include: {model: Order_Items},
+    });
     res.json(updatedCart);
   } catch (err) {
     next(err);
@@ -68,7 +74,14 @@ router.delete('/:productId', async (req, res, next) => {
         orderId: cart.id,
       },
     });
-    res.status(204).end();
+    const updatedCart = await Order.findOne({
+      where: {
+        userId: req.user.id,
+        is_fulfilled: false,
+      },
+      include: {model: Order_Items},
+    });
+    res.json(updatedCart);
   } catch (err) {
     next(err);
   }

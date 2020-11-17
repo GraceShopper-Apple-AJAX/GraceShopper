@@ -8,12 +8,12 @@ class SingleProduct extends React.Component {
   }
 
   getStatusMessage = (product) => {
-    if (product.status === 'in_stock') {
-      return 'In stock';
-    } else if (product.status === 'running_low') {
-      return 'Running low';
+    if (product.status === 'running_low') {
+      return 'We seem to be running low on this item!';
+    } else if (product.status === 'out_of_stock') {
+      return 'Sorry, this item is out of stock. Check back soon for updates!';
     } else {
-      return 'Out of stock';
+      return undefined;
     }
   };
 
@@ -36,24 +36,31 @@ class SingleProduct extends React.Component {
             <h3>Prices:</h3>
             <ul>
               <li>
-                Scoop - ${product.scoop_price} ({product.scoop_quantity} scoops
-                remaining!)
+                Scoop - ${product.scoop_price} (
+                {product.status === 'in_stock'
+                  ? product.scoop_quantity
+                  : undefined}{' '}
+                remaining)
               </li>
               <li>
-                Pint - ${product.pint_price} ({product.pint_quantity} pints
-                remaining!)
+                Pint - ${product.pint_price} (
+                {product.status === 'in_stock'
+                  ? product.pint_quantity
+                  : undefined}{' '}
+                remaining)
               </li>
               <li>
-                Tub - ${product.tub_price} ({product.tub_quantity} tubs
-                remaining!)
+                Tub - ${product.tub_price} (
+                {product.status === 'in_stock'
+                  ? product.tub_quantity
+                  : undefined}{' '}
+                remaining)
               </li>
             </ul>
             <h3>Description:</h3> {product.description}
-            <h3>Status:</h3> {this.getStatusMessage(product)}
-            {product.status === 'out_of_stock' ? undefined : (
+            {product.status === 'in_stock' ? undefined : (
               <>
-                <h3>Quantity:</h3>
-                {product.quantity}
+                <h3> Status:</h3> {this.getStatusMessage(product)}
               </>
             )}
           </div>
