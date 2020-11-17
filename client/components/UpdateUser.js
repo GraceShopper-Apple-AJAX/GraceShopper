@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-// import updateUser thunk from the store
+import updateUserThunk from '../store/user';
 
 class UpdateUser extends React.Component {
     constructor(props) {
@@ -193,7 +193,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return {
-        // update: (studentId, localState) => dispatch(updateUser(userId, localState))
+        update: (studentId, localState) => dispatch(updateUserThunk(userId, localState))
     }
 }
 
