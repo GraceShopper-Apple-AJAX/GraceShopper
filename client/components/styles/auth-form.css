@@ -4,33 +4,39 @@
   margin-top: 3em;
   margin-bottom: 3em;
   max-height: 100%;
+  min-height: 100vh;
 }
 
 #login-wrapper,
 #register-wrapper {
-  width: 90%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
   flex-direction: column;
-  width: 32%;
-  height: 500px;
+  width: 40%;
+  height: 100%;
   background-color: #ffe2ea;
   font-family: 'IBM Plex Serif', serif;
   box-shadow: 10px 10px rgba(0, 0, 0, 0.6);
+  padding: 2%;
+}
+
+#in-form {
+  width: 80%;
 }
 
 #register-wrapper #reg-desc {
   width: 60%;
+  margin: 10%;
 }
 
 input {
-  width: 300px;
+  width: 100%;
   border: 1px solid #ccc;
   box-sizing: border-box;
   resize: vertical;
-  height: 40px;
+  padding: 5%;
 }
 
 label {
@@ -38,12 +44,19 @@ label {
   display: flex;
   justify-content: center;
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10%;
 }
 
 /* buttons */
-#login-button,
+#login-button {
+  background-color: #fd779d;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  margin: 10%;
+}
 #reg-button {
   background-color: #fd779d;
   color: white;
@@ -51,28 +64,20 @@ label {
   border: none;
   cursor: pointer;
   text-align: center;
-  margin-top: 30px;
-  width: 120px;
+  width: 100%;
 }
 
 .googleButton {
   background-color: #94baf9;
   color: white;
   border: none;
-  width: 200px;
-  height: 40px;
-  border-radius: 3%;
-  padding-top: 5px;
   cursor: pointer;
+  text-align: center;
+  width: 80%;
+  margin-top: 10%;
 }
 
 .googleButton img {
   width: 30px;
   height: auto;
-}
-
-.googleButton b {
-  top: -10px;
-  left: 5px;
-  position: relative;
 }
