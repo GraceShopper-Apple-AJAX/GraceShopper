@@ -33,7 +33,6 @@ class UpdateUser extends React.Component {
     async handleSubmit (event) {
         event.preventDefault();
         try {
-            console.log(this.props)
             await this.props.update(this.props.user.id, this.state);
             this.setState({
                 firstName: '',
@@ -49,7 +48,6 @@ class UpdateUser extends React.Component {
                 password: ''
             });
         } catch (err) {
-            console.log(this.props)
             console.log(err);
         }
     }

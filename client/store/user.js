@@ -20,7 +20,11 @@ const defaultUser = {};
 const getUser = (user) => ({type: GET_USER, user});
 const removeUser = () => ({type: REMOVE_USER});
 const addUser = (user) => ({type: ADD_USER, user});
-const updateUser = (user) => ({ type: UPDATE_USER, user })
+export const updateUser = (user, localState) => ({ 
+  type: UPDATE_USER, 
+  user,
+  localState 
+})
 
 /**
  * THUNK CREATORS
