@@ -31,7 +31,7 @@
   margin: 10%;
 }
 
-input {
+#authinput {
   width: 100%;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -39,7 +39,7 @@ input {
   padding: 5%;
 }
 
-label {
+#authlabel {
   padding: 1%;
   display: flex;
   justify-content: center;

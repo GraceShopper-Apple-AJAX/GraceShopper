@@ -11,6 +11,7 @@ import {
   Cart,
   Admin,
   SingleUser,
+  Checkout
 } from './components';
 import {me} from './store';
 
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route exact path="/admin/users/:userId" component={SingleUser} />
         <Route path="/cart" component={Cart} />
         {role === 'admin' && <Route exact path="/admin" component={Admin} />}
+        <Route path="/checkout" component={Checkout} />
         <Route component={UserHome} />
       </Switch>
     );

@@ -41,6 +41,16 @@ router.get('/:userId', async (req, res, next) => {
   }
 });
 
+router.put('/:userId', async (req,res,next)=>{
+  try{
+    const user = await User.findByPk(req.params.userId);
+    await User.update(req.body);
+    res.json(user)
+  } catch (err){
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     console.log('server received post signup request');
@@ -54,5 +64,6 @@ router.post('/', async (req, res, next) => {
     }
   }
 });
+
 
 module.exports = router;
