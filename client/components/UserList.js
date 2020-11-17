@@ -6,20 +6,24 @@ const UserList = (props) => {
 
   return (
     <table style={{border: '1px solid black'}}>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-      </tr>
-      {users.map((user) => (
-        <tr key={user.id}>
-          <td>
-            <Link to={`/admin/users/${user.id}`}>{user.firstName} </Link>
-          </td>
-          <td>{user.lastName}</td>
-          <td>{user.email}</td>
+      <tbody>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Role</th>
         </tr>
-      ))}
+        {users.map((user) => (
+          <tr key={user.id}>
+            <td>
+              <Link to={`/admin/users/${user.id}`}>{user.firstName} </Link>
+            </td>
+            <td>{user.lastName}</td>
+            <td>{user.email}</td>
+            <td>{user.role}</td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 };

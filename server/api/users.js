@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
       return;
     }
     const users = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'email'],
+      attributes: ['id', 'firstName', 'lastName', 'email', 'role'],
     });
     res.json(users);
   } catch (err) {
@@ -27,6 +27,7 @@ router.get('/:userId', async (req, res, next) => {
         'firstName',
         'lastName',
         'email',
+        'role',
         'address_line1',
         'address_line2',
         'city',
