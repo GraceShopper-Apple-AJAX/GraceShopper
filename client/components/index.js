@@ -9,6 +9,9 @@ export {default as Header} from './Header';
 //login/signup
 export {Login} from './auth-form';
 export {default as Signup} from './Signup';
+export {default as //user panel
+MyAccount} from './MyAccount';
+
 //cart
 export {Cart} from './Cart';
 
@@ -21,7 +24,6 @@ export {default as SingleUser} from './SingleUser';
 
 //checkout
 export {default as Checkout} from './Checkout';
-export {default as Payment} from './Payment'
-export {default as Success} from './Success'
-export {default as Confirmation} from './Confirmation'
-
+export {default as Payment} from './Payment';
+export {default as Success} from './Success';
+export {default as Confirmation} from './Confirmation';
