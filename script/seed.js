@@ -17,7 +17,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/2HaHYe1',
       }),
 
       Product.create({
@@ -32,7 +32,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/3nABFjI',
       }),
 
       Product.create({
@@ -46,7 +46,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/36CZz6Y',
       }),
 
       Product.create({
@@ -61,7 +61,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://f52.co/36LBETa',
       }),
 
       Product.create({
@@ -76,7 +76,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/35BCNgB',
       }),
 
       Product.create({
@@ -91,7 +91,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/3f6OCyu',
       }),
 
       Product.create({
@@ -106,7 +106,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/3pCf7R8',
       }),
 
       Product.create({
@@ -121,7 +121,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/3kDctHm',
       }),
 
       Product.create({
@@ -135,7 +135,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/2HdFX0M',
       }),
 
       Product.create({
@@ -149,7 +149,7 @@ const seed = async () => {
         scoop_quantity: 100,
         tub_quantity: 100,
         pint_quantity: 100,
-        imageUrl: 'https://bit.ly/3pyzdvQ',
+        imageUrl: 'https://bit.ly/3kD5fCX',
       }),
     ]);
     const users = await Promise.all([
