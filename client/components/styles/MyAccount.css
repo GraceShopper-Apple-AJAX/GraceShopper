@@ -14,6 +14,7 @@
 
 .acc-element {
     background-color: #bdd5ea;
+    width: 100%;
     margin: 1px;
     padding: 1%;
 }
@@ -21,4 +22,8 @@
 .acc-element h2, h3 {
     text-align: center;
     position: relative;
+}
+
+#acc-settings-title {
+    width: 100%
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import updateUserThunk from '../store/user';
-import {auth} from '../store';
+import {fetchSingleUser} from '../store/admin-single-user';
 
 class UpdateUser extends React.Component {
     constructor(props) {
@@ -22,6 +22,10 @@ class UpdateUser extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.fetchSingleUser(this.props.match.params.userId);
     }
 
     async handleChange (event) {
@@ -55,6 +59,7 @@ class UpdateUser extends React.Component {
     }
 
     render() {
+        const user = this.props.user;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -63,8 +68,8 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="firstName"
                             onChange={this.handleChange}
-                            value={this.state.firstName}
-                            placeholder="First Nameee"
+                            value={user.firstName}
+                            placeholder="First Name"
                         />
                 </label>
                 <br />
@@ -73,7 +78,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="lastName"
                             onChange={this.handleChange}
-                            value={this.state.lastName}
+                            value={user.lastName}
                             placeholder="Last Name"
                         />
                 </label>
@@ -83,7 +88,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="mobile"
                             onChange={this.handleChange}
-                            value={this.state.mobile}
+                            value={user.mobile}
                             placeholder="Phone Number"
                         />
                 </label>
@@ -93,7 +98,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="email"
                             onChange={this.handleChange}
-                            value={this.state.email}
+                            value={user.email}
                             placeholder="E-Mail Address"
                         />
                 </label>
@@ -103,7 +108,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="address_line1"
                             onChange={this.handleChange}
-                            value={this.state.address_line1}
+                            value={user.address_line1}
                             placeholder="Street Address"
                         />
                 </label>
@@ -113,7 +118,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="address_line2"
                             onChange={this.handleChange}
-                            value={this.state.address_line2}
+                            value={user.address_line2}
                             placeholder="Street Address 2 (optional)"
                         />
                 </label>
@@ -123,7 +128,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="city"
                             onChange={this.handleChange}
-                            value={this.state.city}
+                            value={user.city}
                             placeholder="City"
                         />
                 </label>
@@ -133,7 +138,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="zip"
                             onChange={this.handleChange}
-                            value={this.state.zip}
+                            value={user.zip}
                             placeholder="Zip/Postal Code"
                         />
                 </label>
@@ -143,7 +148,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="state_or_province"
                             onChange={this.handleChange}
-                            value={this.state.state_or_province}
+                            value={user.state_or_province}
                             placeholder="State/Province"
                         />
                 </label>
@@ -153,7 +158,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="country"
                             onChange={this.handleChange}
-                            value={this.state.country}
+                            value={user.country}
                             placeholder="Country"
                         />
                 </label>
@@ -193,7 +198,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return {
-        update: (user) => dispatch(updateUserThunk(user))
+        update: (user) => dispatch(updateUserThunk(user)),
+        fetchSingleUser: (id) => dispatch(fetchSingleUser(id))
     }
 }
 

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Link, Route, Redirect} from 'react-router-dom';
 import UpdateUser from './UpdateUser';
 import {Login} from './auth-form';
-import './styles/User-Home.css';
+import './styles/MyAccount.css';
 
 /**
  * COMPONENT
@@ -16,7 +16,7 @@ export const MyAccount = (props) => {
     <div id='my-account'>
       {isLoggedIn ? (
         <div id='acc-elements'>
-          <div class='acc-element'>
+          <div class='acc-element' id='acc-settings-title'>
             <h2>Acount Settings</h2>
           </div>
           <div class='acc-element'>
