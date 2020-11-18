@@ -1,0 +1,29 @@
+#my-account {
+    font-family: 'Varela Round', sans-serif;
+}
+
+#acc-elements {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-content: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.acc-element {
+    background-color: #bdd5ea;
+    width: 100%;
+    margin: 1px;
+    padding: 1%;
+}
+
+.acc-element h2, h3 {
+    text-align: center;
+    position: relative;
+}
+
+#acc-settings-title {
+    width: 100%
+}

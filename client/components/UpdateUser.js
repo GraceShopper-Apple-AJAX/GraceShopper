@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import updateUserThunk from '../store/user';
+import {fetchSingleUser} from '../store/admin-single-user';
+import {auth} from '../store';
 
 class UpdateUser extends React.Component {
     constructor(props) {
@@ -17,10 +19,15 @@ class UpdateUser extends React.Component {
             zip: '',
             state_or_province: '',
             country: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.fetchSingleUser(this.props.match.params.userId);
     }
 
     async handleChange (event) {
@@ -31,8 +38,16 @@ class UpdateUser extends React.Component {
 
     async handleSubmit (event) {
         event.preventDefault();
+        console.log(this.props)
+        console.log(this.props.user)
         try {
-            await this.props.update(this.props.user.id, this.state);
+            if (this.state.password === this.state.confirmPassword) {
+                    await this.props.update(this.state);
+                    alert('Account information updated successfuly!');
+            } else {
+                alert("Incorrect Password!");
+            }
+
             this.setState({
                 firstName: '',
                 lastName: '',
@@ -52,11 +67,10 @@ class UpdateUser extends React.Component {
     }
 
     render() {
+        const user = this.props.user;
+        const { error } = this.props;
         return (
             <div>
-                {/* Might need to change link? */}
-                <Link to="/orders">View Past Orders</Link>
-
                 <form onSubmit={this.handleSubmit}>
                 <label htmlFor="First Name">
                         <input
@@ -114,7 +128,7 @@ class UpdateUser extends React.Component {
                             name="address_line2"
                             onChange={this.handleChange}
                             value={this.state.address_line2}
-                            placeholder="Street Address 2 (optional)"
+                            placeholder="Street Address 2 (optional)!"
                         />
                 </label>
                 <br />
@@ -178,6 +192,9 @@ class UpdateUser extends React.Component {
                         />
                 </label>
                 <br />
+
+                {error && error.response && <div> {error.response.data} </div>}
+
                 <button type="submit">Update Details</button>
                 </form>
             </div>
@@ -193,8 +210,10 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return {
-        update: (studentId, localState) => dispatch(updateUserThunk(userId, localState))
+        update: (user) => dispatch(updateUserThunk(user)),
+        fetchSingleUser: (id) => dispatch(fetchSingleUser(id)),
+        auth: (email, password) => dispatch(auth(email, password))
     }
 }
 
-export default connect(mapState, mapDispatch)(UpdateUser);
+export default withRouter(connect(mapState, mapDispatch)(UpdateUser));

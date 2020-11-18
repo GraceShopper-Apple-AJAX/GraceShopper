@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link, Route, Redirect} from 'react-router-dom';
-
+import UpdateUser from './UpdateUser';
 import {Login} from './auth-form';
-import './styles/User-Home.css';
+import './styles/MyAccount.css';
 
 /**
  * COMPONENT
@@ -13,12 +13,23 @@ export const MyAccount = (props) => {
   const {isLoggedIn} = props;
 
   return (
-    <div>
+    <div id='my-account'>
       {isLoggedIn ? (
-        <div>
-          Welcome to account settings<h3>my account</h3>
-          <h3>EDIT ACCOUNT</h3>
-          <h3>ORDER HISTORY</h3>
+        <div id='acc-elements'>
+          <div class='acc-element' id='acc-settings-title'>
+            <h2>Acount Settings</h2>
+          </div>
+          <div class='acc-element'>
+            <h3>My Account</h3>
+          </div>
+          <div class='acc-element'>
+            <h3>Edit Account</h3>
+            <UpdateUser />
+          </div>
+          <div class='acc-element'>
+            <h3>Order History</h3>
+            <Link to="/orders">View Past Orders</Link>
+          </div>
         </div>
       ) : (
         <div>
