@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {StepTitle} from 'semantic-ui-react';
 
 //ACTION TYPES
 
@@ -23,6 +24,17 @@ export const fetchSingleProduct = (productId) => {
     } catch (err) {
       console.error('There was a problem fetching this product!');
       console.error(err);
+    }
+  };
+};
+
+export const updateProductThunk = (product) => {
+  return async (dispatch) => {
+    try {
+      const {data} = await axios.put(`/api/products/${product.id}`, product);
+      dispatch(setSingleProduct(data));
+    } catch (error) {
+      console.log('error updating product');
     }
   };
 };

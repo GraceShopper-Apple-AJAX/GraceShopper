@@ -21,4 +21,38 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
+//POST single product
+router.post('/', async (req, res, next) => {
+  try {
+    const product = await Product.create(req.body);
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//PUT single product
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId);
+    product.update(req.body);
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//DELETE single product
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    Product.destroy({
+      where: {
+        id: req.params.productId,
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

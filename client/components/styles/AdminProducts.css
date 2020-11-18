@@ -1,0 +1,9 @@
+#single-product-image {
+  max-width: 300px;
+  height: auto;
+}
+
+#single-product-thumb {
+  width: 60px;
+  height: auto;
+}

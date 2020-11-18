@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const UserList = (props) => {
-  const users = props.users;
+  const products = props.products;
 
   return (
     <table style={{border: '1px solid black'}}>
@@ -13,16 +13,16 @@ const UserList = (props) => {
           <th>Email</th>
           <th>Role</th>
         </tr>
-        {users.map((user) => (
-          <tr key={user.id}>
+        {products.map((product) => (
+          <tr key={product.id}>
             <td>
-              <Link to={`/admin/users/${user.id}`}>{user.firstName} </Link>
+              <Link to={`/admin/products/${product.id}`}>
+                {product.firstName}{' '}
+              </Link>
             </td>
             <td>
-              <Link to={`/admin/users/${user.id}`}>{user.lastName} </Link>
+              <Link to={`/admin/products/${product.id}`}>{product.name} </Link>
             </td>
-            <td>{user.email}</td>
-            <td>{user.role}</td>
           </tr>
         ))}
       </tbody>
