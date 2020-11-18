@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Order_Items, Order} = require('../db/models');
+const {Order_Items, Order, Product} = require('../db/models');
 
 // GET cart - /api/cart/
 //get the Order_Items table based on the matching userId where order !is_fulfilled
@@ -34,7 +34,9 @@ router.post('/', async (req, res, next) => {
       },
     });
     const {quantity, selected_size, productId} = req.body;
-    let orderItem = await Order_Items.findOne({where: {productId}});
+    let orderItem = await Order_Items.findOne({
+      where: {productId, orderId: cart.id},
+    });
     if (orderItem !== null) {
       orderItem.quantity = quantity;
       await orderItem.save();
@@ -51,7 +53,9 @@ router.post('/', async (req, res, next) => {
         userId: req.user.id,
         is_fulfilled: false,
       },
-      include: {model: Order_Items},
+      include: {
+        model: Order_Items,
+      },
     });
     res.json(updatedCart);
   } catch (err) {
@@ -79,7 +83,9 @@ router.delete('/:productId', async (req, res, next) => {
         userId: req.user.id,
         is_fulfilled: false,
       },
-      include: {model: Order_Items},
+      include: {
+        model: Order_Items,
+      },
     });
     res.json(updatedCart);
   } catch (err) {

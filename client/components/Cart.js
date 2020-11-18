@@ -2,9 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import {Button, Confirm} from 'semantic-ui-react';
 
-import SingleProduct from './SingleProduct';
 import {updateCart, fetchCart, deleteCart, deleteFromCart} from '../store/cart';
 
 import './styles/Cart.css';
@@ -13,42 +11,39 @@ export class Cart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {open: false};
+    this.state = {
+      quantity: 0,
+    };
   }
 
-  show = () => this.setState({open: true});
-
-  handleConfirm = () => this.setState({result: 'confirmed', open: false});
-  handleCancel = () => this.setState({result: 'cancelled', open: false});
-
-  //if user doesn't have items in cart, can't checkout AND the items box says "your cart is empty"
-
-  //delete button removes all instances from the cart, or can change quantity with + - buttons
+  componentDidMount() {
+    this.props.fetchCart(this.props.match.params.userId);
+  }
 
   //need to show and update cart total + shipping, number of items
 
   //calculate total price + shipping
 
   //get cart based on user id or sessionId if not logged in?
-  componentDidMount() {
-    if (this.props.userId) {
-      //get cart based on user id
-    } else {
-      this.props.fetchCart(this.props.match.params.orderId);
-    }
-  }
-
-  // async clearCartItems(cart){
-  //   try{
-  //     await this.props.deleteCartItems(cart);
-  //     this.props.fetchCart
-  //   } catch(err){
-  //     console.error(err)
-  //   }
-  // }
 
   render() {
-    const cartProducts = this.props;
+    const {cart} = this.props;
+
+    // const totalItemPrice = () => {
+    //   let total = 0;
+    //   for (const item in cart.Order_Items) {
+    //     if (item.selected_size === 'scoop') {
+    //       total += cart.product.scoop_price;
+    //     } else if (item.selected_size === 'tub') {
+    //       total += cart.product.tub_price;
+    //     } else {
+    //       total += cart.product.pint_price
+    //     }
+    //   }
+    //   return total;
+    // };
+
+    const shipping = this.totalItemPrice >= 100 ? 'Free' : '$35.00';
 
     return (
       <div id="cartpage-wrapper">
@@ -57,41 +52,39 @@ export class Cart extends React.Component {
           <Link to="/products">Continue Shopping</Link>
         </div>
 
-        <div id="clear-cart-button">
-          <button>Clear Cart</button>
-
-          <div id="cart-wrap">
-            <div id="cartitem-wrapper">
-              {this.cartProducts.length ? (
+        <div id="cart-wrap">
+          <div id="cartitem-wrapper">
+            <div id="clear-cart-button">
+              <button type="button" onClick={() => this.props.deleteCart()}>
+                Clear Cart
+              </button>
+              {cart.Order_Items !== undefined ? (
                 <div>
                   <table id="itemtable">
                     <tbody>
                       <tr>
                         <th width="100px"></th>
                         <th width="120px" className="centeralign">
-                          Item Name
+                          Size
                         </th>
-                        <th>Size</th>
-                        <th>Price</th>
+                        <th>Amount</th>
+                        {/* <th>Price</th> */}
                         <th width="40px" className="rightalign">
-                          Qty
+                          Remove
                         </th>
                       </tr>
-                      {cartProducts.map((product) => (
-                        <tr key={product.id}>
-                          <td id="checkout-thumb">{product.imageUrl}</td>
-                          <td>{product.name}</td>
-                          <td>{product.selected_size}</td>
-                          <td>{product.price}</td>
-                          <td>-{product.quantity}+</td>
+                      {cart.Order_Items.map((orderItem) => (
+                        <tr key={orderItem.productId}>
+                          <td id="checkout-thumb">{orderItem.imageUrl}</td>
+                          {/* <td>{cart.product.id === orderItem.productId ? cart.product.name : undefined}</td> */}
+                          <td>{orderItem.selected_size}</td>
+                          {/* <td>{orderItem.price}</td> */}
+                          <td>-{orderItem.quantity}+</td>
                           <td>
                             <button
+                              type="button"
                               onClick={() =>
-                                this.props.deleteFromCart(
-                                  quantity,
-                                  selected_size,
-                                  productId
-                                )
+                                this.props.deleteFromCart(orderItem.productId)
                               }
                             >
                               x
@@ -110,29 +103,32 @@ export class Cart extends React.Component {
 
           <div id="summary-wrapper">
             <h4>Order Summary:</h4>
-            <div>{quantity}Items</div>
+            {/* <div>Number of Items</div> */}
             <table id="summary-table">
               <tbody>
                 <tr>
-                  <th>Item Total</th>
-                  <td>NUMBER OF CART ITEMS</td>
+                  <th>Items</th>
+                  <td>
+                    {cart.Order_Items ? cart.Order_Items.length : undefined}
+                  </td>
                 </tr>
 
                 <tr>
                   <th>Shipping</th>
-                  <td>{cart.total >= 100 ? 'Free' : '$35.00'}</td>
+                  <td>{shipping}</td>
                 </tr>
-                <tr>
+                {/* <tr>
                   <th>Total</th>
-                  <td>CART PRICE + SHIPPING</td>
-                </tr>
+                  <td>{this.totalItemPrice} + {this.shipping}</td>
+                </tr> */}
               </tbody>
             </table>
 
             <Link to="/checkout">
               <button
                 id="checkout-button"
-                disabled={this.state.cartProducts.length ? '' : 'disabled'}
+                type="button"
+                disabled={cart ? '' : 'disabled'}
               >
                 Checkout
               </button>
@@ -147,22 +143,24 @@ export class Cart extends React.Component {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
-    cartProducts: state.cart.order_items,
     userId: state.user.id,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCart: (cart) => dispatch(fetchCart(cart)),
-
-    updateCart: (quantity, selected_size, productId) =>
-      dispatch(updateCart(quantity, selected_size, productId)),
-
-    deleteFromCart: (quantity, selectedSize, productId) =>
-      dispatch(deleteFromCart(quantity, selectedSize, productId)),
-
-    deleteCart: (cart) => dispatch(deleteCart(cart)),
+    fetchCart(userId) {
+      dispatch(fetchCart(userId));
+    },
+    updateCart(quantity, selected_size, productId) {
+      dispatch(updateCart(quantity, selected_size, productId));
+    },
+    deleteFromCart(productId) {
+      dispatch(deleteFromCart(productId));
+    },
+    deleteCart() {
+      dispatch(deleteCart());
+    },
   };
 };
 
