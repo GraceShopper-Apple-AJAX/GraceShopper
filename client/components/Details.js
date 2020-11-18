@@ -5,6 +5,7 @@ import './styles/Checkout.css';
 class Details extends Component {
   constructor(props) {
     super(props);
+    this.form = React.createRef();
   }
 
   saveAndContinue = (e) => {
@@ -16,7 +17,7 @@ class Details extends Component {
     const {values} = this.props;
     return (
       <Form className="form-group" onSubmit={this.handleSubmit}>
-        <h3>Enter Details</h3>
+        <h3>Enter Shipping Details</h3>
         <Form.Field>
           <label>Address Line 1</label>
           <input
@@ -24,6 +25,7 @@ class Details extends Component {
             onChange={this.props.handleChange('address1')}
             defaultValue={values.address1}
             className="input-control"
+            required
           />
         </Form.Field>
         <Form.Field>
@@ -33,6 +35,7 @@ class Details extends Component {
             onChange={this.props.handleChange('address2')}
             defaultValue={values.address2}
             className="input-control"
+            required
           />
         </Form.Field>
         <Form.Field>
@@ -42,6 +45,7 @@ class Details extends Component {
             onChange={this.props.handleChange('city')}
             defaultValue={values.city}
             className="input-control"
+            required
           />
         </Form.Field>
         <Form.Field>
@@ -51,6 +55,7 @@ class Details extends Component {
             onChange={this.props.handleChange('country')}
             defaultValue={values.country}
             className="input-control"
+            required
           />
         </Form.Field>
         <Form.Field>
@@ -60,6 +65,7 @@ class Details extends Component {
             onChange={this.props.handleChange('zip')}
             defaultValue={values.zip}
             className="input-control"
+            required
           />
         </Form.Field>
         <Form.Field>
@@ -69,9 +75,10 @@ class Details extends Component {
             onChange={this.props.handleChange('state_or_province')}
             defaultValue={values.state_or_province}
             className="input-control"
+            required
           />
         </Form.Field>
-        <Button onClick={this.saveAndContinue}>Next</Button>
+        <Button onClick={this.saveAndContinue}>Save and Continue</Button>
       </Form>
     );
   }

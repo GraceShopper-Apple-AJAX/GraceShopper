@@ -21,12 +21,6 @@ export class Checkout extends Component {
       country: '',
       zip: '',
       state_or_province: '',
-      //payment
-      cc_type: '',
-      cc_number_secure: '',
-      cc_security_code: '',
-      cc_expiration: '',
-      cardholder_name: '',
     };
     this.nextStep = this.nextStep.bind(this);
     this.prevStep = this.prevStep.bind(this);
@@ -74,12 +68,6 @@ export class Checkout extends Component {
       country,
       zip,
       state_or_province,
-      //credit card info
-      cc_type,
-      cc_number_secure,
-      cc_security_code,
-      cc_expiration,
-      cardholder_name,
     } = this.state;
 
     const values = {
@@ -89,12 +77,6 @@ export class Checkout extends Component {
       country,
       zip,
       state_or_province,
-      //credit card info
-      cc_type,
-      cc_number_secure,
-      cc_security_code,
-      cc_expiration,
-      cardholder_name,
     };
 
     return (
@@ -111,7 +93,7 @@ export class Checkout extends Component {
                         <ProgressBar
                           bgcolor="#FEC3D4"
                           percentage="25"
-                          label="Details"
+                          label="Shipping Details"
                           className="checkout-forms"
                         />
                       </div>
