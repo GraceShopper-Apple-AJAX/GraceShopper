@@ -55,7 +55,11 @@ const createApp = () => {
   app.use(compression());
 
   // adding Helmet to enhance your API's security
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: false,
+    })
+  );
 
   // using bodyParser to parse JSON bodies into JS objects
   app.use(bodyParser.json());
