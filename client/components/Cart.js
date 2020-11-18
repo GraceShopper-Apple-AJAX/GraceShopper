@@ -7,16 +7,27 @@ import {updateCart, fetchCart, deleteCart, deleteFromCart} from '../store/cart';
 import './styles/Cart.css';
 
 export class Cart extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      quantity: 0,
-    };
-  }
+  //   this.state = {
+  //     quantity: 0,
+  //   };
+  // }
 
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
+  }
+
+  getPriceForSize(product) {
+    const orderItem = product.Order_Items;
+    if (orderItem.selected_size === 'scoop') {
+      return product.scoop_price;
+    } else if (orderItem.selected_size === 'pint') {
+      return product.pint_price;
+    } else {
+      return product.tub_price;
+    }
   }
 
   //need to show and update cart total + shipping, number of items
@@ -28,21 +39,20 @@ export class Cart extends React.Component {
   render() {
     const {cart} = this.props;
 
-    // const totalItemPrice = () => {
-    //   let total = 0;
-    //   for (const item in cart.Order_Items) {
-    //     if (item.selected_size === 'scoop') {
-    //       total += cart.product.scoop_price;
-    //     } else if (item.selected_size === 'tub') {
-    //       total += cart.product.tub_price;
-    //     } else {
-    //       total += cart.product.pint_price
-    //     }
-    //   }
-    //   return total;
-    // };
+    const totalItemPrice = () => {
+      let total = 0;
+      if (!cart.products) {
+        return total;
+      }
+      // eslint-disable-next-line guard-for-in
+      for (const product of cart.products) {
+        const orderItem = product.Order_Items;
+        total += this.getPriceForSize(product) * orderItem.quantity;
+      }
+      return total;
+    };
 
-    const shipping = this.totalItemPrice >= 100 ? 'Free' : '$35.00';
+    const shipping = totalItemPrice() >= 100 ? 'Free' : '$35.00';
 
     return (
       <div id="cartpage-wrapper">
@@ -57,41 +67,47 @@ export class Cart extends React.Component {
               <button type="button" onClick={() => this.props.deleteCart()}>
                 Clear Cart
               </button>
-              {cart.Order_Items !== undefined ? (
+              {cart.products !== undefined ? (
                 <div>
                   <table id="itemtable">
                     <tbody>
                       <tr>
                         <th width="100px"></th>
                         <th width="120px" className="centeralign">
-                          Size
+                          Name
                         </th>
+                        <th>Size</th>
+                        <th>Price</th>
                         <th>Amount</th>
-                        {/* <th>Price</th> */}
                         <th width="40px" className="rightalign">
                           Remove
                         </th>
                       </tr>
 
-                      {cart.Order_Items.map((orderItem) => (
-                        <tr key={orderItem.productId}>
-                          <td id="checkout-thumb">{orderItem.imageUrl}</td>
-                          {/* <td>{cart.product.id === orderItem.productId ? cart.product.name : undefined}</td> */}
-                          <td>{orderItem.selected_size}</td>
-                          {/* <td>{orderItem.price}</td> */}
-                          <td>-{orderItem.quantity}+</td>
-                          <td>
-                            <button
-                              type="button"
-                              onClick={() =>
-                                this.props.deleteFromCart(orderItem.productId)
-                              }
-                            >
-                              x
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
+                      {cart.products.map((product) => {
+                        const orderItem = product.Order_Items;
+                        return (
+                          <tr key={orderItem.productId}>
+                            <td id="checkout-thumb">
+                              <img id="checkout-thumb" src={product.imageUrl} />
+                            </td>
+                            <td>{product.name}</td>
+                            <td>{orderItem.selected_size}</td>
+                            <td>{this.getPriceForSize(product)}</td>
+                            <td>-{orderItem.quantity}+</td>
+                            <td>
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  this.props.deleteFromCart(orderItem.productId)
+                                }
+                              >
+                                x
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
@@ -109,19 +125,19 @@ export class Cart extends React.Component {
               <tbody>
                 <tr>
                   <th>Items</th>
-                  <td>
-                    {cart.Order_Items ? cart.Order_Items.length : undefined}
-                  </td>
+                  <td>{cart.products ? cart.products.length : undefined}</td>
                 </tr>
 
                 <tr>
                   <th>Shipping</th>
                   <td>{shipping}</td>
                 </tr>
-                {/* <tr>
+                <tr>
                   <th>Total</th>
-                  <td>{this.totalItemPrice} + {this.shipping}</td>
-                </tr> */}
+                  <td>
+                    {totalItemPrice()} + {shipping}
+                  </td>
+                </tr>
               </tbody>
             </table>
 

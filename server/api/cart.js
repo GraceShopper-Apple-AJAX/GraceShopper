@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
         is_fulfilled: false,
       },
       include: {
-        model: Order_Items,
+        model: Product,
       },
     });
     res.json(cart);
