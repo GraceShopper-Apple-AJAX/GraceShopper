@@ -9,11 +9,10 @@ export {default as Header} from './Header';
 //login/signup
 export {Login} from './auth-form';
 export {default as Signup} from './Signup';
-export {default as //user panel
-MyAccount} from './MyAccount';
+export {default as MyAccount} from './MyAccount'; //user panel
 
 //cart
-export {Cart} from './Cart';
+export {default as Cart} from './Cart';
 
 //products
 export {default as AllProducts} from './AllProducts';

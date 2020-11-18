@@ -11,8 +11,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const socketio = require('socket.io');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-const helmet = require('helmet');
+
 module.exports = app;
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -54,18 +53,8 @@ const createApp = () => {
   // compression middleware
   app.use(compression());
 
-  // adding Helmet to enhance your API's security
-  app.use(
-    helmet({
-      contentSecurityPolicy: false,
-    })
-  );
-
   // using bodyParser to parse JSON bodies into JS objects
   app.use(bodyParser.json());
-
-  // enabling CORS for all requests
-  app.use(cors());
 
   // session middleware with passport
   app.use(

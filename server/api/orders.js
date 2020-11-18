@@ -1,6 +1,13 @@
 const router = require('express').Router();
 const {Order_Items, Order} = require('../db/models');
 
+// function isAdmin(req, res, next) {
+//   if (req.user && req.user.role === 'admin') {
+//     next(); // allow the next route to run
+//   } else {
+//     res.status(403).send("You don't have permission to view this page.")}
+// }
+
 //GET all orders associated with a user, including historical prices
 router.get('/', async (req, res, next) => {
   try {
