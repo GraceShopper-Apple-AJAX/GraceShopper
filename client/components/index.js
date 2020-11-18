@@ -20,6 +20,8 @@ export {default as SingleProduct} from './SingleProduct';
 //admin
 export {default as Admin} from './Admin';
 export {default as SingleUser} from './SingleUser';
+export {default as AdminSingleProduct} from './AdminSingleProduct';
+export {default as AdminAddProduct} from './AdminAddProduct';
 
 //checkout
 export {default as Checkout} from './Checkout';
