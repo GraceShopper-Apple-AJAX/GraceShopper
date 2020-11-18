@@ -2,9 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import {Button, Confirm} from 'semantic-ui-react';
 
-import SingleProduct from './SingleProduct';
 import {updateCart, fetchCart, deleteCart, deleteFromCart} from '../store/cart';
 
 import './styles/Cart.css';
@@ -13,42 +11,21 @@ export class Cart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {open: false};
+    this.state = {};
   }
 
-  show = () => this.setState({open: true});
-
-  handleConfirm = () => this.setState({result: 'confirmed', open: false});
-  handleCancel = () => this.setState({result: 'cancelled', open: false});
-
-  //if user doesn't have items in cart, can't checkout AND the items box says "your cart is empty"
-
-  //delete button removes all instances from the cart, or can change quantity with + - buttons
+  componentDidMount() {
+    this.props.fetchCart(this.props.match.params.userId);
+  }
 
   //need to show and update cart total + shipping, number of items
 
   //calculate total price + shipping
 
   //get cart based on user id or sessionId if not logged in?
-  componentDidMount() {
-    if (this.props.userId) {
-      //get cart based on user id
-    } else {
-      this.props.fetchCart(this.props.match.params.orderId);
-    }
-  }
-
-  // async clearCartItems(cart){
-  //   try{
-  //     await this.props.deleteCartItems(cart);
-  //     this.props.fetchCart
-  //   } catch(err){
-  //     console.error(err)
-  //   }
-  // }
 
   render() {
-    const cartProducts = this.props;
+    const cart = this.props;
 
     return (
       <div id="cartpage-wrapper">
@@ -57,12 +34,12 @@ export class Cart extends React.Component {
           <Link to="/products">Continue Shopping</Link>
         </div>
 
-        <div id="clear-cart-button">
-          <button>Clear Cart</button>
+        <div id="cart-wrap">
+          <div id="cartitem-wrapper">
+            <div id="clear-cart-button">
+              <button>Clear Cart</button>
 
-          <div id="cart-wrap">
-            <div id="cartitem-wrapper">
-              {this.cartProducts.length ? (
+              {this.props.cart ? (
                 <div>
                   <table id="itemtable">
                     <tbody>
@@ -77,8 +54,8 @@ export class Cart extends React.Component {
                           Qty
                         </th>
                       </tr>
-                      {cartProducts.map((product) => (
-                        <tr key={product.id}>
+                      {cart.cartItems.map((product) => (
+                        <tr key={product.productId}>
                           <td id="checkout-thumb">{product.imageUrl}</td>
                           <td>{product.name}</td>
                           <td>{product.selected_size}</td>
@@ -110,12 +87,12 @@ export class Cart extends React.Component {
 
           <div id="summary-wrapper">
             <h4>Order Summary:</h4>
-            <div>{quantity}Items</div>
+            <div>Number Items</div>
             <table id="summary-table">
               <tbody>
                 <tr>
                   <th>Item Total</th>
-                  <td>NUMBER OF CART ITEMS</td>
+                  <td>{cart.length} Items</td>
                 </tr>
 
                 <tr>
@@ -130,10 +107,7 @@ export class Cart extends React.Component {
             </table>
 
             <Link to="/checkout">
-              <button
-                id="checkout-button"
-                disabled={this.state.cartProducts.length ? '' : 'disabled'}
-              >
+              <button id="checkout-button" disabled={cart ? '' : 'disabled'}>
                 Checkout
               </button>
             </Link>
@@ -147,22 +121,24 @@ export class Cart extends React.Component {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
-    cartProducts: state.cart.order_items,
     userId: state.user.id,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchCart: (cart) => dispatch(fetchCart(cart)),
-
-    updateCart: (quantity, selected_size, productId) =>
-      dispatch(updateCart(quantity, selected_size, productId)),
-
-    deleteFromCart: (quantity, selectedSize, productId) =>
-      dispatch(deleteFromCart(quantity, selectedSize, productId)),
-
-    deleteCart: (cart) => dispatch(deleteCart(cart)),
+    fetchCart(userId) {
+      dispatch(fetchCart(userId));
+    },
+    updateCart(quantity, selected_size, productId) {
+      dispatch(updateCart(quantity, selected_size, productId));
+    },
+    deleteFromCart(quantity, selectedSize, productId) {
+      dispatch(deleteFromCart(quantity, selectedSize, productId));
+    },
+    deleteCart(cart) {
+      dispatch(deleteCart(cart));
+    },
   };
 };
 

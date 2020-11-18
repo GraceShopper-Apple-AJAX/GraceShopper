@@ -1,7 +1,13 @@
 const router = require('express').Router();
 const {User} = require('../db/models');
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
+
+function isAdmin(req, res, next) {
+  if (req.user && req.user.role === 'admin') {
+    next(); // allow the next route to run
+  } else {
+    res.status(403).send("You don't have permission to view this page.");
+  }
+}
 
 router.post('/', async (req, res, next) => {
   try {
@@ -17,26 +23,8 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-const checkJwt = jwt({
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://dev-wdkq7sro.us.auth0.com/.well-known/jwks.json`
-  }),
-
-  // Validate the audience and the issuer.
-  audience: 'https://ice-cream-shoppe',
-  issuer: `https://dev-wdkq7sro.us.auth0.com/`,
-  algorithms: ['RS256']
-});
-
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin()) {
-      res.status(401);
-      return;
-    }
     const users = await User.findAll({
       attributes: ['id', 'firstName', 'lastName', 'email', 'role'],
     });
@@ -46,12 +34,8 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', isAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin()) {
-      res.status(401);
-      return;
-    }
     const user = await User.findByPk(req.params.userId, {
       attributes: [
         'firstName',
