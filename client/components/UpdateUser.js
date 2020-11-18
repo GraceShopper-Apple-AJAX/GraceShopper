@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import updateUserThunk from '../store/user';
 import {auth} from '../store';
 
@@ -33,7 +33,9 @@ class UpdateUser extends React.Component {
     async handleSubmit (event) {
         event.preventDefault();
         try {
-            await this.props.update(this.props.user.id, this.state);
+            console.log(this.props)
+            console.log(this.props.match.params)
+            await this.props.update(this.props.match.params.user.id);
             this.setState({
                 firstName: '',
                 lastName: '',
@@ -62,7 +64,7 @@ class UpdateUser extends React.Component {
                             name="firstName"
                             onChange={this.handleChange}
                             value={this.state.firstName}
-                            placeholder="First Name"
+                            placeholder="First Nameee"
                         />
                 </label>
                 <br />
@@ -191,8 +193,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
     return {
-        update: (studentId, localState) => dispatch(updateUserThunk(userId, localState))
+        update: (user) => dispatch(updateUserThunk(user))
     }
 }
 
-export default connect(mapState, mapDispatch)(UpdateUser);
+export default withRouter(connect(mapState, mapDispatch)(UpdateUser));
