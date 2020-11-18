@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchSingleProduct} from '../store/singleProduct';
-import {updateCart} from '../store/cart';
+import {deleteFromCart, updateCart} from '../store/cart';
 
 class SingleProduct extends React.Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class SingleProduct extends React.Component {
       itemPrice: 0,
       showAdded: false,
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSize = this.handleSize.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
   componentDidMount() {
@@ -25,6 +25,7 @@ class SingleProduct extends React.Component {
     this.setState((prevState) => {
       return {
         quantity: prevState.quantity + 1,
+        totalPrice: prevState.totalPrice + prevState.itemPrice,
       };
     });
   };
@@ -34,6 +35,7 @@ class SingleProduct extends React.Component {
       if (prevState.quantity > 0) {
         return {
           quantity: prevState.quantity - 1,
+          totalPrice: prevState.totalPrice - prevState.itemPrice,
         };
       } else {
         return null;
@@ -59,10 +61,24 @@ class SingleProduct extends React.Component {
     });
   };
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  getPriceForSize(size, product) {
+    if (size === 'scoop') {
+      return product.scoop_price;
+    } else if (size === 'pint') {
+      return product.pint_price;
+    } else {
+      return product.tub_price;
+    }
+  }
+
+  handleSize(event) {
+    const size = event.target.value;
+    const sizePrice = this.getPriceForSize(size, this.props.product);
+    this.setState((prevState) => ({
+      selected_size: size,
+      itemPrice: sizePrice,
+      totalPrice: sizePrice * prevState.quantity,
+    }));
   }
 
   getStatusMessage = (product) => {
@@ -75,40 +91,21 @@ class SingleProduct extends React.Component {
     }
   };
 
-  getSize(size, product) {
-    if (size === 'Scoop') {
-      return (
-        <>
-          ${product.scoop_price}{' '}
-          <input value={this.state.quantity} onChange={this.handleChange} />
-        </>
-      );
-    } else if (size === 'Pint') {
-      return (
-        <>
-          ${product.pint_price}{' '}
-          <input value={this.state.quantity} onChange={this.handleChange} />
-        </>
-      );
-    } else {
-      return (
-        <>
-          ${product.tub_price}{' '}
-          <input value={this.state.quantity} onChange={this.handleChange} />
-        </>
-      );
-    }
-  }
-
   render() {
     const product = this.props.product;
     if (product === null) {
       return <h3>There was a problem fetching this product!</h3>;
     }
 
-    const addQuantity = <button onClick={this.incrementQuantity}>+</button>;
+    const addQuantity = (
+      <button type="button" onClick={this.incrementQuantity}>
+        +
+      </button>
+    );
     const decreaseQuantity = (
-      <button onClick={this.decrementQuantity}>-</button>
+      <button type="button" onClick={this.decrementQuantity}>
+        -
+      </button>
     );
 
     return (
@@ -130,20 +127,34 @@ class SingleProduct extends React.Component {
             />
             <h3>Description:</h3> {product.description}
             <h3>Choose Size and Quantity:</h3>
-            <select id="dropdown" onChange={this.handleChange}>
+            <select id="dropdown" onChange={this.handleSize}>
+              <option value="" disabled selected>
+                Choose one...
+              </option>
               <option value="scoop">Scoop</option>
               <option value="pint">Pint</option>
               <option value="tub">Tub</option>
             </select>
             <h3>
-              {decreaseQuantity}Quantity{addQuantity}
+              {decreaseQuantity}Quantity: {addQuantity}{' '}
+              {this.state.quantity > 0 ? this.state.quantity : undefined}
             </h3>
-            <h3>Number of Items:</h3> {this.state.quantity}
-            <h3>Total Price:</h3> {this.state.totalPrice}
+            <h3>Total Price:</h3>{' '}
+            <>
+              {this.state.totalPrice.toFixed(2) === '-0.00'
+                ? 0
+                : this.state.totalPrice.toFixed(2)}
+            </>
+            {product.status === 'in_stock' ? undefined : (
+              <>
+                {' '}
+                <h3> Status:</h3> {this.getStatusMessage(product)}
+              </>
+            )}
             <button
               type="button"
               onClick={() =>
-                updateCart(
+                this.props.updateCart(
                   this.state.quantity,
                   this.state.selected_size,
                   this.props.product.id
@@ -152,12 +163,14 @@ class SingleProduct extends React.Component {
             >
               Add to Cart
             </button>
-            {product.status === 'in_stock' ? undefined : (
-              <>
-                {' '}
-                <h3> Status:</h3> {this.getStatusMessage(product)}
-              </>
-            )}
+            <div>
+              <button
+                type="button"
+                onClick={() => this.props.deleteFromCart(this.props.product.id)}
+              >
+                Remove from Cart
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -176,6 +189,7 @@ const mapDispatchToProps = (dispatch) => {
     fetchSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
     updateCart: (quantity, selected_size, productId) =>
       dispatch(updateCart(quantity, selected_size, productId)),
+    deleteFromCart: (productId) => dispatch(deleteFromCart(productId)),
   };
 };
 
