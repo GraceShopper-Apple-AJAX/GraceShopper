@@ -30,10 +30,6 @@ export const MyAccount = (props) => {
             <h3>Order History</h3>
             <Link to="/orders">View Past Orders</Link>
           </div>
-          
-          
-          
-          
         </div>
       ) : (
         <div>
