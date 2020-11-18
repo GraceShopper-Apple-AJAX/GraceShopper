@@ -14,7 +14,6 @@ export class Cart extends React.Component {
     this.state = {
       quantity: 0,
     };
-  }
 
   componentDidMount() {
     this.props.fetchCart(this.props.match.params.userId);
@@ -27,6 +26,7 @@ export class Cart extends React.Component {
   //get cart based on user id or sessionId if not logged in?
 
   render() {
+    
     const {cart} = this.props;
 
     // const totalItemPrice = () => {
@@ -55,10 +55,11 @@ export class Cart extends React.Component {
         <div id="cart-wrap">
           <div id="cartitem-wrapper">
             <div id="clear-cart-button">
+
               <button type="button" onClick={() => this.props.deleteCart()}>
                 Clear Cart
               </button>
-              {cart.Order_Items !== undefined ? (
+              {cart.Order_Items !== undefined ? 
                 <div>
                   <table id="itemtable">
                     <tbody>
@@ -73,6 +74,7 @@ export class Cart extends React.Component {
                           Remove
                         </th>
                       </tr>
+              
                       {cart.Order_Items.map((orderItem) => (
                         <tr key={orderItem.productId}>
                           <td id="checkout-thumb">{orderItem.imageUrl}</td>
@@ -80,6 +82,7 @@ export class Cart extends React.Component {
                           <td>{orderItem.selected_size}</td>
                           {/* <td>{orderItem.price}</td> */}
                           <td>-{orderItem.quantity}+</td>
+              
                           <td>
                             <button
                               type="button"
@@ -103,6 +106,7 @@ export class Cart extends React.Component {
 
           <div id="summary-wrapper">
             <h4>Order Summary:</h4>
+
             {/* <div>Number of Items</div> */}
             <table id="summary-table">
               <tbody>

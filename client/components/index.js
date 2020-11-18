@@ -10,6 +10,7 @@ export {default as Header} from './Header';
 export {Login} from './auth-form';
 export {default as Signup} from './Signup';
 export {default as MyAccount} from './MyAccount'; //user panel
+
 //cart
 export {default as Cart} from './Cart';
 
