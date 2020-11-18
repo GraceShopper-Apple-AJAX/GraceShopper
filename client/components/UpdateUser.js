@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import updateUserThunk from '../store/user';
 import {fetchSingleUser} from '../store/admin-single-user';
+import {auth} from '../store';
 
 class UpdateUser extends React.Component {
     constructor(props) {
@@ -18,7 +19,8 @@ class UpdateUser extends React.Component {
             zip: '',
             state_or_province: '',
             country: '',
-            password: ''
+            password: '',
+            confirmPassword: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,10 +38,16 @@ class UpdateUser extends React.Component {
 
     async handleSubmit (event) {
         event.preventDefault();
+        console.log(this.props)
+        console.log(this.props.user)
         try {
-            console.log(this.props)
-            console.log(this.props.match.params)
-            await this.props.update(this.props.match.params.user.id);
+            if (this.state.password === this.state.confirmPassword) {
+                    await this.props.update(this.state);
+                    alert('Account information updated successfuly!');
+            } else {
+                alert("Incorrect Password!");
+            }
+
             this.setState({
                 firstName: '',
                 lastName: '',
@@ -60,6 +68,7 @@ class UpdateUser extends React.Component {
 
     render() {
         const user = this.props.user;
+        const { error } = this.props;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -68,7 +77,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="firstName"
                             onChange={this.handleChange}
-                            value={user.firstName}
+                            value={this.state.firstName}
                             placeholder="First Name"
                         />
                 </label>
@@ -78,7 +87,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="lastName"
                             onChange={this.handleChange}
-                            value={user.lastName}
+                            value={this.state.lastName}
                             placeholder="Last Name"
                         />
                 </label>
@@ -88,7 +97,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="mobile"
                             onChange={this.handleChange}
-                            value={user.mobile}
+                            value={this.state.mobile}
                             placeholder="Phone Number"
                         />
                 </label>
@@ -98,7 +107,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="email"
                             onChange={this.handleChange}
-                            value={user.email}
+                            value={this.state.email}
                             placeholder="E-Mail Address"
                         />
                 </label>
@@ -108,7 +117,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="address_line1"
                             onChange={this.handleChange}
-                            value={user.address_line1}
+                            value={this.state.address_line1}
                             placeholder="Street Address"
                         />
                 </label>
@@ -118,8 +127,8 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="address_line2"
                             onChange={this.handleChange}
-                            value={user.address_line2}
-                            placeholder="Street Address 2 (optional)"
+                            value={this.state.address_line2}
+                            placeholder="Street Address 2 (optional)!"
                         />
                 </label>
                 <br />
@@ -128,7 +137,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="city"
                             onChange={this.handleChange}
-                            value={user.city}
+                            value={this.state.city}
                             placeholder="City"
                         />
                 </label>
@@ -138,7 +147,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="zip"
                             onChange={this.handleChange}
-                            value={user.zip}
+                            value={this.state.zip}
                             placeholder="Zip/Postal Code"
                         />
                 </label>
@@ -148,7 +157,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="state_or_province"
                             onChange={this.handleChange}
-                            value={user.state_or_province}
+                            value={this.state.state_or_province}
                             placeholder="State/Province"
                         />
                 </label>
@@ -158,7 +167,7 @@ class UpdateUser extends React.Component {
                             type="text"
                             name="country"
                             onChange={this.handleChange}
-                            value={user.country}
+                            value={this.state.country}
                             placeholder="Country"
                         />
                 </label>
@@ -183,6 +192,9 @@ class UpdateUser extends React.Component {
                         />
                 </label>
                 <br />
+
+                {error && error.response && <div> {error.response.data} </div>}
+
                 <button type="submit">Update Details</button>
                 </form>
             </div>
@@ -199,7 +211,8 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
     return {
         update: (user) => dispatch(updateUserThunk(user)),
-        fetchSingleUser: (id) => dispatch(fetchSingleUser(id))
+        fetchSingleUser: (id) => dispatch(fetchSingleUser(id)),
+        auth: (email, password) => dispatch(auth(email, password))
     }
 }
 
